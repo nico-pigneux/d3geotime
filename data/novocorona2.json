@@ -1,0 +1,36 @@
+{
+    "sum": {
+        "Wuhan": [
+            114.3055,
+            30.5928,
+            1058,
+            0,
+            40,
+            80
+        ],
+        "Chongqing": [
+            106.9123,
+            29.4316,
+            110,
+            20,
+            2,
+            6
+        ],
+        "Xiangyang": [
+            112.1224,
+            32.0090,
+            110,
+            20,
+            2,
+            6
+        ]
+    },
+
+    "individaul":{
+        "000001":["Wuhan", "confirmed", "onset"],
+        "000002":["Wuhan", "suspected", "onset"],
+        "000003":["Wuhan", "confirmed", "deceased"],
+        "000004":["Chongqing", "confirmed", "onset"],
+        "000005":["Xiangyang", "confirmed", "onset"]
+    }
+}

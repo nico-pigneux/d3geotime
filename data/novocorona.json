@@ -1,0 +1,72 @@
+[       
+    {
+        "id": "00000000001",
+        "demographic": {}, 
+        "diagnoses":[
+            {
+                "time":"1/24/2020 11:00 AM",
+                "geographic":{
+                    "gps_coor":{"lat":"30.5928", "lng":"114.3055"},
+                    "city":"Wuhan",
+                    "zip":"",
+                    "county":"",
+                    "province":"Hubei",
+                    "state":"",
+                    "country":"China"
+                },
+            "type": "suspected",
+            "symptoms":[],
+            "methods":[]
+            },
+            {
+                "time":"1/26/2020 11:00 AM",
+                "geographic":{
+                    "gps_coor":{"lat":"30.5928", "lng":"114.3055"},
+                    "city":"Wuhan",
+                    "zip":"",
+                    "county":"",
+                    "province":"Hubei",
+                    "state":"",
+                    "country":"China"
+                },
+            "type": "confirmed",
+            "symptoms":[]
+            }                
+        ],
+        "interventions":[], 
+        "status":[
+            {
+                "time":"1/26/2020 11:00 AM",
+                "type":"onset",
+                "commments":"onset/recovered/death/onset/lost(lost of followup)"
+            }
+        ],
+        "migration":[
+            {"time":"", "geographic":{}}
+        ]
+
+    },
+    {
+        "id": "00000000002",
+        "diagnoses":[
+            {
+                "time":"1/26/2020 11:00 AM",
+                "geographic":{
+                    "gps_coor":{"lat":"30.5928", "lng":"114.3055"},
+                    "city":"Wuhan",
+                    "province":"Hubei",
+                    "country":"China"
+                },
+            "type": "confirmed"
+            }                
+        ],
+        "status":[
+            {
+                "time":"1/26/2020 11:00 AM",
+                "type":"deceased",
+                "commments":"onset/recovered/deceased/onset/lost(lost of followup)"
+            }
+        ]
+
+    }
+]
