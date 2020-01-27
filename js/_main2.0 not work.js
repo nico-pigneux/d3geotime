@@ -61,8 +61,8 @@ d3.json("data/novocorona.json", function (collection) {
     } // end function displayNodes
 
     //define the slider
-    var minDateUnix = moment('2020-01-21', "YYYY MM DD").unix();
-    var maxDateUnix = moment('2020-01-26', "YYYY MM DD").unix();
+    var minDateUnix = moment('2020-01-20', "YYYY MM DD").unix();
+    var maxDateUnix = moment('2020-01-28', "YYYY MM DD").unix();
     var interval = 60 * 24 /12;
 
     var newData;
