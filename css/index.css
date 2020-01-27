@@ -1,0 +1,17 @@
+.allcases {
+    opacity: .5;
+    fill: black;
+    stroke: black;
+    stroke-width: 0px;
+}
+
+.confirmed {
+    opacity: .8;
+    fill: black;
+    stroke: black;
+    stroke-width: 0px;
+}
+.leaflet-zoom-animated {
+    background-color:white;
+    opacity:.5;
+}
