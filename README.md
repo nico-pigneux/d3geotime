@@ -8,8 +8,10 @@ https://observablehq.com/@sfu-iat355/intro-to-leaflet-d3-interactivity
 5. d3.slider.css (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/d3.slider.css downloaded to css/)
 6. novel coronavirus case data from https://docs.google.com/spreadsheets/d/169AP3oaJZSMTquxtrkgFYMSp4gTApLTTWqo25qCpjL0/edit#gid=2116154334
 
-
-
-get contents from google sheet
+To solve:
+1. get contents from google sheet
 https://github.com/mikeymckay/google-spreadsheet-javascript/blob/master/sample.html
 https://github.com/mikeymckay/google-spreadsheet-javascript
+
+2. play.time line..
+https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763

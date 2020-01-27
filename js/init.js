@@ -1,8 +1,7 @@
 // set the center point (Wuhan, China)
-var anchorpointgps = [30.5928, 114.3055]
-var defaultzoom=5
-
-
+// var anchorpointgps = [30.5928, 114.3055]
+var anchorpointgps = [39.6243, 19.9217]
+var defaultzoom=2
 
 //create the map, set anchorpoint, and default zoom level
 var map = L.map('map').setView(anchorpointgps, defaultzoom);
