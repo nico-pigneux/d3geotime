@@ -16,12 +16,20 @@ L.tileLayer(
 }).addTo(map);
 
 /* Initialize the SVG layer */
-map._initPathRoot()
+map._initPathRoot() // for leaflet v0.7 and earlier
+
+// the following are for leaflet v0.8+
+// https://groups.google.com/forum/#!topic/leaflet-js/bzM9ssegitU
+// var svgLayer = L.svg();
+// svgLayer.addTo(map);
 
 /* Add a big svg, and a big g element */
+// for leaflet v .7 and earlier
 var bigsvg = d3.select("#map").select("svg"),
     bigg = bigsvg.append("g");
 
-// bigsvg
-// .style('background-color', "white")
-// .style('opacity', '0.6')
+// for leaflet v1.0+???
+var bigsvg = d3.select("#map").select("svg");
+    var bigg = d3.select("#map").select("svg").select('g');
+    bigg.attr("class", "leaflet-zoom-hide");
+

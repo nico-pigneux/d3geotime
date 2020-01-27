@@ -12,6 +12,7 @@
     stroke-width: 0px;
 }
 .leaflet-zoom-animated {
-    background-color:white;
-    opacity:.5;
+    /* background-color:blue; */
+    /* fill-opacity:.3; */
+    opacity: .5
 }

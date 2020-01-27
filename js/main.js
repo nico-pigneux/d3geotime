@@ -40,17 +40,22 @@ d3.json("data/novocorona.json", function (collection) {
         ;
 
     // on reset, update the map
+    // for leaflet v 0.7 and earlier
     map.on("viewreset", update);
     update();
 
     function update() {
         nodegs.attr("transform",
             function (d) {
+                console.log(d)
                 return "translate(" +
                     map.latLngToLayerPoint(d.LatLng).x + "," +
                     map.latLngToLayerPoint(d.LatLng).y + ")";
             }
         )
     }
+
+
+
 })
 
