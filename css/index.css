@@ -1,18 +1,24 @@
 .allcases {
-    opacity: .5;
-    fill: black;
+    opacity: .4;
+    fill: red;
     stroke: black;
     stroke-width: 0px;
 }
 
 .confirmed {
-    opacity: .8;
+    opacity: .4;
     fill: black;
     stroke: black;
     stroke-width: 0px;
 }
-.leaflet-zoom-animated {
-    /* background-color:blue; */
-    /* fill-opacity:.3; */
+
+/* .leaflet-zoom-animated {
+    background-color:blue;
+    fill-opacity:.3;
     opacity: .5
+} */
+
+#slider3 {
+    margin: 20px 0 10px 20px;
+    width: 900px;
 }

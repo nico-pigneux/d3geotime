@@ -1,9 +1,15 @@
 Based on:
-http://bl.ocks.org/d3noob/9267535
+https://observablehq.com/@sfu-iat355/intro-to-leaflet-d3-interactivity
 
-showing static figures as of 2020-01-25
+1. upgraded to leaflet 1.6
+2. add leaflet provider (https://raw.githubusercontent.com/leaflet-extras/leaflet-providers/master/leaflet-providers.js downloaded to js/ folder, and is loaded in index.html)
+3. add d3.slider.js (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/d3.slider.js downloaded to js/)
+4. rest_777.txt (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/rest_777.txt downloaded to data/)
+5. d3.slider.css (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/d3.slider.css downloaded to css/)
+6. novel coronavirus case data from https://docs.google.com/spreadsheets/d/169AP3oaJZSMTquxtrkgFYMSp4gTApLTTWqo25qCpjL0/edit#gid=2116154334
 
-This is based on leaflet 0.7, quite old
 
-check this: (for leaflet 1.6.0)
-https://leafletjs.com/examples/quick-start/
+
+get contents from google sheet
+https://github.com/mikeymckay/google-spreadsheet-javascript/blob/master/sample.html
+https://github.com/mikeymckay/google-spreadsheet-javascript
