@@ -152,19 +152,17 @@ d3.json("data/novocorona.json", function (collection) {
         );
 
     // format ticks
-    var formatDate = d3.time.format('%Y%m%d');
-    var theticktextEles=d3.selectAll("g.tick").select('text');
-    const monthNames=['JAN', 'FEB', 'MAR']
+    const monthNames=['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    theticktextEles=d3.selectAll('g.tick').select('text')
     // console.log(theticks);
     theticktextEles.text(d=>{
         console.log(d)
         var thetimevalue = new Date(d);
         console.log(thetimevalue)
-
         var monthStr= monthNames[thetimevalue.getMonth()];
         var datestr =thetimevalue.getFullYear().toString() 
-                    +   monthStr
-                    + thetimevalue.getDate().toString();    
+            + '-'  +   monthStr + '-'
+            + thetimevalue.getDate().toString();    
         console.log(datestr)
 
         return datestr
