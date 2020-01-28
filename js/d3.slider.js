@@ -154,6 +154,7 @@ return function module() {
 
           axis = d3.svg.axis()
               .ticks(Math.round(sliderLength / 100))
+              // .```tickFormat```(tickFormat)
               .tickFormat(tickFormat)
               .orient((orientation === "horizontal") ? "bottom" :  "right");
 
