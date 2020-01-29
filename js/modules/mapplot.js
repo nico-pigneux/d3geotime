@@ -18,12 +18,13 @@ var displayNodes = function (dataArray) {
         if (A.length > 5 ) { 
             return math.quantileSeq(A, [.5, .8, .95, .99])
         } else {
-            return 999999,999999,999999,999999
+            return [999999,999999,999999,999999]
         }  
     }
     
     //update legend
-    console.log(cutoff)
+    // console.log(cutoff)
+    if (cutoff !== undefined && cutoff[0] !== 999999){
     var i = 1
     d3.selectAll('text.circlelegendtext').nodes().forEach(d=>{
         if (i === 1){
@@ -37,6 +38,7 @@ var displayNodes = function (dataArray) {
         d3.select(d).text(thestr)
         i = i+1
     })
+}
 
 
       // delete existing g
