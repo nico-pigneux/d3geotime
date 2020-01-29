@@ -22,10 +22,10 @@ thebody.append('h3')
     })
     .append('a')
     .attrs({
-        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/d3leafletmap16",
+        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v5",
         "target": '_blank'
     })
-    .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/d3leafletmap16")
+    .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
 
 // a big box to hold everthing
 var thebigbox = thebody.append('div')
