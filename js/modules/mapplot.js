@@ -1,5 +1,4 @@
 var displayNodes = function (dataArray) {
-
     
 
     var recentdata= getRecent(dataArray);
@@ -27,14 +26,16 @@ var displayNodes = function (dataArray) {
     if (cutoff !== undefined && cutoff[0] !== 999999){
     var i = 1
     d3.selectAll('text.circlelegendtext').nodes().forEach(d=>{
+        // console.log(i)
         if (i === 1){
           var thestr = '0 < confirmed <' + cutoff[i-1].toFixed()  
         } else if (i=== cutoff.length + 1) {
             var thestr = "confirmed >= " + cutoff[i-2].toFixed()
         }  else {
-            var thestr = cutoff[i-2].toFixed() + ' <= confirmed < ' + cutoff[i-1].toFixed()
-        }
-        
+            if (i > 1 && i < 5){
+                var thestr = cutoff[i-2].toFixed() + ' <= confirmed < ' + cutoff[i-1].toFixed()
+            }
+        }        
         d3.select(d).text(thestr)
         i = i+1
     })
@@ -42,8 +43,8 @@ var displayNodes = function (dataArray) {
 
 
       // delete existing g
-    d3.selectAll('circle.confirmed').remove();
-    d3.selectAll('g.nodeg').remove();
+    // d3.selectAll('circle.confirmed').remove();
+    // d3.selectAll('g.nodeg').remove();
 
     // //bind data to g elements
     var nodegs = bigg.selectAll("g")
@@ -65,14 +66,78 @@ var displayNodes = function (dataArray) {
         })
         ;
 
+
+    // get the recent confirmed
+    var recentdeceased = []
+    recentdata.forEach(d=>{
+        recentdeceased.push(d.data[5])
+    })
+
+    var cutoffdeceased = getCutoff2(recentdeceased);
+    // console.log(cutoffdeceased);
+
+    function getCutoff2(A){
+        if (A.length > 5 ) { 
+            return math.quantileSeq(A, [.8, .95, .99])
+        } else {
+            return [999999,999999,999999]
+        }  
+    }
+
+    function cat_r3 (ncases, cutoffv, rcatsv ) {
+
+        // console.log(ncases) // e.g., 1
+        // console.log(cutoffv) // e.g., 0, 1, 55.6
+        // console.log(rcatsv) // [2, 5 10]
+
+        var r;
+        // if (ncases===0){ r= 0 }
+        // else if (ncases <= cutoffv[0]) {
+        //     r = rcatsv[0]
+        // } else if (ncases <= cutoffv[1]){
+        //     r=rcatsv[1]
+        // } else if (ncases <= cutoffv[2]){
+        //     r=rcatsv[2]
+        // }
+
+        if (ncases===0){ r= 0 }
+        else if (ncases <= 1) {
+            r = rcatsv[0]
+        } else if (ncases <=55) {
+            r=rcatsv[1]
+        } else {
+            r=rcatsv[2]
+        }
+
+
+        // console.log(ncases)
+        // console.log('returned rw' + r)
+        return r;
+    }
+
     // bind deceased cases of a location to circles
-    // var deceasedcasenodes = nodegs.append('circle')
-    //     .attr("class", 'deceased')
-    //     .attr("r", d => {
-    //         var r = cat_r(d.data[5]);
-    //         return r;
-    //     })
-    //     ;
+    var deceasedcasenodes = nodegs.append('rect')
+        .attr("class", 'deceased')
+        .attr("width", 
+            d => {
+            if (d.data[6] === "Shanghai") {
+                //  console.log(d.data);
+                 var w = cat_r3(d.data[5], cutoffdeceased, scats);
+                //  console.log (w);
+            }else {
+                var w = cat_r3(d.data[5], cutoffdeceased, scats);
+            }
+            return w;
+        }
+        )
+        .attr("height", d => {
+            var w = cat_r3(d.data[5], cutoffdeceased, scats);
+            return w;
+        })
+        ;
+        
+
+
 
     function updatenodes() {
 

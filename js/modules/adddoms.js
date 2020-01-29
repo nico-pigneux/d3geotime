@@ -66,15 +66,18 @@ var mapbox = themaparea.append('div')
     })
     .styles({
         "width": "1000px",
-        "height": "600px"
+        "height": "500px"
     })
     ;
 // add a box to hold legends
 var legendbox =  themaparea.append('div')
     .attrs({"id": "legendbox"})
 var legendsvg=legendbox.append('svg').attrs({"class":"legendsvg", "width":"1000px"})
+
+
 var i =0
 var offset
+// add legend circle
 rcats.forEach(d=>{
     legendsvg.append('g')
         .attr("class", 'legendcircleg')
@@ -94,9 +97,53 @@ rcats.forEach(d=>{
     i=i+1;
 })
 
+// add legend circle text
 var i=0;
 legendsvg.selectAll('g.legendcircleg').nodes().forEach(d=>{
     d3.select(d).append('text').text("Confirmed cases").attr("class", "circlelegendtext")
+    .attr("dy", ()=>{
+        var offsetv =  40 -(rcats[rcats.length-1] - rcats[i])
+        return offsetv
+    })
+    .attr("text-anchor", "middle")
+    i=i+1;
+})
+
+// add rect g
+var i =0
+var offset
+// add legend rect
+scats.forEach(d=>{
+    legendsvg.append('g')
+        .attr("class", 'legendrectg')
+        .attr("transform", ()=>{
+        if (i===0){
+            offseth = 50;
+        } else {
+            offseth = i * 150//offseth + (rcats[i-1] + rcats[i])*4 +20
+        }
+        var offsetv = scats[scats.length-1] - d + 100
+        // console.log(i)
+        return "translate (" + (offseth) + "," + offsetv +")"
+    })
+    .append('rect').attrs({"class":"legendrect"}).attr("width", d).attr("height", d)
+    ;
+    i=i+1;
+})
+
+// add legend rect text
+var i=0;
+legendsvg.selectAll('g.legendrectg').nodes().forEach(d=>{
+    d3.select(d).append('text')
+    .text(d=>{
+        if (i ===0) {
+            return "death:(0,1]"
+        } else if (i ===1){
+            return "death:(1,55]"
+        } else {
+            return "death:>=55"
+        }
+    }).attr("class", "rectlegendtext")
     .attr("dy", ()=>{
         var offsetv =  40 -(rcats[rcats.length-1] - rcats[i])
         return offsetv

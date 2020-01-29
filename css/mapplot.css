@@ -13,17 +13,19 @@
     stroke-width: 1px;   
 }
 
-.circlelegendtext{
+.circlelegendtext, .rectlegendtext {
     font: normal 10px sans-serif;
     fill: black;
 }
 
-.deceased {
+.deceased, .legendrect {
     opacity: 1;
-    fill: Red;
+    fill-opacity:0;
+    /* fill:black; */
     stroke: black;
-    stroke-width: 0px;
+    stroke-width: 1px;
 }
+
 
 /* .leaflet-zoom-animated {
     background-color:blue;

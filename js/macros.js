@@ -40,17 +40,18 @@ function getRecent(dataArray){
 }
 
 // determine the cat of confirmed cases
-function cat_r (ncases, cutoff, rcats ) {
+function cat_r (ncases, cutoff, rcatsv ) {
+    var r
     if (ncases===0){ r= 0 }
     else if (ncases < cutoff[0]) {
-        r = rcats[0]
+        r = rcatsv[0]
     }
     else {
         var i= 1
-        r=rcats[rcats.length-1]
+        r=rcatsv[rcatsv.length-1]
         cutoff.forEach(d=>{
             if (ncases >= cutoff[i-1] && ncases < cutoff[i]) { 
-                r = rcats[i]
+                r = rcatsv[i]
              }
             i=i+1
         })
