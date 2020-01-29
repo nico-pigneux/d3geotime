@@ -69,6 +69,42 @@ var mapbox = themaparea.append('div')
         "height": "600px"
     })
     ;
+// add a box to hold legends
+var legendbox =  themaparea.append('div')
+    .attrs({"id": "legendbox"})
+var legendsvg=legendbox.append('svg').attrs({"class":"legendsvg", "width":"1000px"})
+var i =0
+var offset
+rcats.forEach(d=>{
+    legendsvg.append('g')
+        .attr("class", 'legendcircleg')
+        .attr("transform", ()=>{
+        if (i===0){
+            offseth = 50;
+        } else {
+            offseth = i * 150//offseth + (rcats[i-1] + rcats[i])*4 +20
+        }
+        var offsetv = rcats[rcats.length-1] - d + 40
+        // console.log(i)
+        return "translate (" + (offseth) + "," + offsetv +")"
+    })
+    .append('circle').attrs({"class":"legendcircle"}).attr("r", d)
+    ;
+
+    i=i+1;
+})
+
+var i=0;
+legendsvg.selectAll('g.legendcircleg').nodes().forEach(d=>{
+    d3.select(d).append('text').text("Confirmed cases").attr("class", "circlelegendtext")
+    .attr("dy", ()=>{
+        var offsetv =  40 -(rcats[rcats.length-1] - rcats[i])
+        return offsetv
+    })
+    .attr("text-anchor", "middle")
+    i=i+1;
+})
+               
 
 //the youtubebox
 var theyoutubebox = thebigbox.append('div')
@@ -136,7 +172,7 @@ thefootnotebox.append("p")
             4. rest_777.txt (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/rest_777.txt )<br />
             5. d3.slider.css (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/d3.slider.css )<br />
             6. novel coronavirus case data from
-            https://docs.google.com/spreadsheets/d/169AP3oaJZSMTquxtrkgFYMSp4gTApLTTWqo25qCpjL0/edit#gid=2116154334<br />
+            https://docs.google.com/spreadsheets/d/1yZv9w9zRKwrGTaR-YzmAqMefw4wMlaXocejdxZaTs6w/htmlview?usp=sharing&sle=true<br />
             7. https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763 <br />
         </p>
 `)

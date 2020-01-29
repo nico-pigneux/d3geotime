@@ -1,28 +1,76 @@
 var displayNodes = function (dataArray) {
 
+    
+
+    var recentdata= getRecent(dataArray);
+    // console.log(recentdata)
+
+    // get the recent confirmed
+    var recentconfirmed = []
+    recentdata.forEach(d=>{
+        recentconfirmed.push(d.data[2])
+    })
+
+    var cutoff = getCutoff(recentconfirmed);
+    // console.log(cutoff);
+
+    function getCutoff(A){
+        if (A.length > 5 ) { 
+            return math.quantileSeq(A, [.5, .8, .95, .99])
+        } else {
+            return 999999,999999,999999,999999
+        }  
+    }
+    
+    //update legend
+    console.log(cutoff)
+    var i = 1
+    d3.selectAll('text.circlelegendtext').nodes().forEach(d=>{
+        if (i === 1){
+          var thestr = '0 < confirmed <' + cutoff[i-1].toFixed()  
+        } else if (i=== cutoff.length + 1) {
+            var thestr = "confirmed >= " + cutoff[i-2].toFixed()
+        }  else {
+            var thestr = cutoff[i-2].toFixed() + ' <= confirmed < ' + cutoff[i-1].toFixed()
+        }
+        
+        d3.select(d).text(thestr)
+        i = i+1
+    })
+
+
+      // delete existing g
+    d3.selectAll('circle.confirmed').remove();
+    d3.selectAll('g.nodeg').remove();
+
     // //bind data to g elements
     var nodegs = bigg.selectAll("g")
         .data(dataArray)
         .enter().append("g")
+        .attr("class", "nodeg")
 
-    // bind grouped data of all cases of a location to circles
-    var allcasesnodes = nodegs.append('circle')
-        .attr("class", 'allcases')
-        .attr("r", d => {
-            var r, allcases = d.data[2] + d.data[3];
-            r = cat_r(allcases);
-            return r;
-        })
-        ;
-
-    // bind grouped data of confirmed cases of a location to circles
+    // bind confirmed cases of a location to circles
     var confirmedcasesnodes = nodegs.append('circle')
         .attr("class", 'confirmed')
         .attr("r", d => {
-            var r = cat_r(d.data[2]);
+            if (d.data[6] === "Kathmandu") {
+                // console.log(d);
+                r= cat_r(d.data[2], cutoff, rcats );
+            }else {
+                r= cat_r(d.data[2], cutoff, rcats );
+            }
             return r;
         })
         ;
+
+    // bind deceased cases of a location to circles
+    // var deceasedcasenodes = nodegs.append('circle')
+    //     .attr("class", 'deceased')
+    //     .attr("r", d => {
+    //         var r = cat_r(d.data[5]);
+    //         return r;
+    //     })
+    //     ;
 
     function updatenodes() {
 
@@ -108,7 +156,7 @@ playButton
             button.text("Play");
         } else {
             moving = true;
-            timer = setInterval(step, 100);
+            timer = setInterval(step, speedInMSPerStep);
             button.text("Pause");
         }
         // console.log("Slider moving: " + moving);
