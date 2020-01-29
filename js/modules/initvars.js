@@ -18,7 +18,7 @@ var
 
 var margin = {top:0, right:50, bottom:0, left:10},
     width = 1000 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    height = 100 - margin.top - margin.bottom;
 
 // the global var for plot data
 var dataset;

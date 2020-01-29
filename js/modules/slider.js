@@ -24,7 +24,7 @@ var x = d3.scaleTime()
 // define the slider g component
 var slider = slidersvg.append("g")
   .attr("class", "slider")
-  .attr("transform", "translate(" + margin.left + "," + height / 5 + ")");
+  .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
 
 // add the timeline track
 slider.append("line")

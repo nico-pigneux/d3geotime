@@ -6,7 +6,7 @@ body {
 
 #play-button {
   position: absolute;
-  top: 140px;
+  top: 100px;
   left: 50px;
   background: #f08080;
   padding-right: 26px;
@@ -58,4 +58,5 @@ body {
   stroke: #000;
   stroke-opacity: 0.5;
   stroke-width: 1.25px;
+  cursor:pointer;
 }
