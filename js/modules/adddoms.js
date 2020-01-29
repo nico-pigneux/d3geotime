@@ -22,7 +22,7 @@ thebody.append('h3')
     })
     .append('a')
     .attrs({
-        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v5",
+        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
         "target": '_blank'
     })
     .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
