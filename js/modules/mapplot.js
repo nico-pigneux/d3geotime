@@ -28,12 +28,12 @@ var displayNodes = function (dataArray) {
     d3.selectAll('text.circlelegendtext').nodes().forEach(d=>{
         // console.log(i)
         if (i === 1){
-          var thestr = '0 < confirmed <' + cutoff[i-1].toFixed()  
+          var thestr = 'confirmed <' + cutoff[i-1].toFixed()  
         } else if (i=== cutoff.length + 1) {
-            var thestr = "confirmed >= " + cutoff[i-2].toFixed()
+            var thestr =  cutoff[i-2].toFixed() + "+"
         }  else {
             if (i > 1 && i < 5){
-                var thestr = cutoff[i-2].toFixed() + ' <= confirmed < ' + cutoff[i-1].toFixed()
+                var thestr = cutoff[i-2].toFixed() + "-" + (cutoff[i-1]-1).toFixed()
             }
         }        
         d3.select(d).text(thestr)

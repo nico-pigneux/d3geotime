@@ -85,7 +85,7 @@ rcats.forEach(d=>{
         if (i===0){
             offseth = 50;
         } else {
-            offseth = i * 150//offseth + (rcats[i-1] + rcats[i])*4 +20
+            offseth = i * 100//offseth + (rcats[i-1] + rcats[i])*4 +20
         }
         var offsetv = rcats[rcats.length-1] - d + 40
         // console.log(i)
@@ -100,7 +100,7 @@ rcats.forEach(d=>{
 // add legend circle text
 var i=0;
 legendsvg.selectAll('g.legendcircleg').nodes().forEach(d=>{
-    d3.select(d).append('text').text("Confirmed cases").attr("class", "circlelegendtext")
+    d3.select(d).append('text').text("confirmed").attr("class", "circlelegendtext")
     .attr("dy", ()=>{
         var offsetv =  40 -(rcats[rcats.length-1] - rcats[i])
         return offsetv
@@ -120,7 +120,7 @@ scats.forEach(d=>{
         if (i===0){
             offseth = 50;
         } else {
-            offseth = i * 150//offseth + (rcats[i-1] + rcats[i])*4 +20
+            offseth = i * 100//offseth + (rcats[i-1] + rcats[i])*4 +20
         }
         var offsetv = scats[scats.length-1] - d + 100
         // console.log(i)
@@ -137,11 +137,11 @@ legendsvg.selectAll('g.legendrectg').nodes().forEach(d=>{
     d3.select(d).append('text')
     .text(d=>{
         if (i ===0) {
-            return "death:(0,1]"
+            return "death:0-1"
         } else if (i ===1){
-            return "death:(1,55]"
+            return "2-54"
         } else {
-            return "death:>=55"
+            return "55+"
         }
     }).attr("class", "rectlegendtext")
     .attr("dy", ()=>{
@@ -181,6 +181,13 @@ theyoutubebox.append('iframe')
         "position": "relative",
         "vertical-align": "top"
     })
+
+    theyoutubebox
+    .append("xhtml:a")
+    .attr("href", "./data/cases.csv")
+    .html("<br /><br /><br />download cases.csv")
+    ;
+
 
 // copyright box
 var thefootnotebox = thebody.append('div')
