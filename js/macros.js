@@ -7,6 +7,9 @@ function cat_r(ncases) {
     return r;
 }
 
+
+
+// prepare data
 function getrealdata() {
     var rawdata = [
         ["Shanghai", "China", "2020-01-21 00:00:00", "9", "10", "0", "0", "31.2304", "121.4737"],

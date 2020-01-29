@@ -26,22 +26,30 @@
         crossorigin=""></script>
     <!-- leaflet provider:    https://github.com/leaflet-extras/leaflet-providers -->
     <script src="js/tools/leaflet/leaflet-providers.js"></script>
+
+    <!-- load customized macros -->
+    <script src="js/macros.js"></script>
+
+
 </head>
 
 <body>
 
-    <!-- add html dom elements -->
-    <script src="js/macros.js"></script>
-
+    <!-- set intial vars -->
     <script src="js/modules/initvars.js"></script>
+    <!-- add html dom elements -->
     <script src="js/modules/adddoms.js"></script>
 
     <!-- the initmap.js need a div with the id of 'map', which has to be added upfront (in adddoms.js) -->
     <script src="js/modules/initmap.js"></script>
 
+    <!-- define the slider  -->
     <script src="js/modules/slider.js"></script>
+
+    <!-- define the map plotting methods -->
     <script src="js/modules/mapplot.js"></script>
 
+    <!-- load data and run it! -->
     <script src="js/main.js"></script>
 
 

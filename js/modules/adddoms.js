@@ -32,6 +32,7 @@ var thebigbox = thebody.append('div')
     .attrs({ "class": "bigbox" })
     .styles({
         "border-style": "none",
+        "margin-left": "50px"
     })
 //the map area
 var themaparea = thebigbox.append('div')
@@ -52,14 +53,14 @@ var slidersvg = d3.select("#maparea")
 
 // add g for plotting circles
 var sliderg = slidersvg.append("g")
-    .attr("class", "sliderg")
-  .attr("class", "leaflet-zoom-hide")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // .attr("class", "sliderg")
+    .attr("class", "leaflet-zoom-hide")
+//   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    
+
 //add a play button
 var playButton = themaparea.append('button')
-    .attrs({"id":"play-button"})
+    .attrs({ "id": "play-button" })
     .text("Play")
 
 // add a div box to hold the map
@@ -68,39 +69,39 @@ var mapbox = themaparea.append('div')
         "id": "map"
     })
     .styles({
-        "width":"1000px",
+        "width": "1000px",
         "height": "600px"
     })
-;
+    ;
 
-function nt(){
-//the youtubebox
-var theyoutubebox = thebigbox.append('div')
-    .attrs({ "class": "youtubebox" })
-    .styles({
-        "margin-left": "50px",
-        "display": "inline-block",
-        "position": "relative",
-        "vertical-align":"top"
-});
+function nt() {
+    //the youtubebox
+    var theyoutubebox = thebigbox.append('div')
+        .attrs({ "class": "youtubebox" })
+        .styles({
+            "margin-left": "50px",
+            "display": "inline-block",
+            "position": "relative",
+            "vertical-align": "top"
+        });
 
-//title of the video
-theyoutubebox.append('h2').text('How to view it')
-// the youtube iframe
-theyoutubebox.append('iframe')
-    .attrs({ 
-        "width": "560",
-        "height": "315" ,
-        "src": "https://www.youtube.com/embed/8gliqTh3Sig" ,
-        "frameborder": "0", 
-        "allow": "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
-        "allowfullscreen": null
-    })
-    .styles({
-        "margin-left": "50px",
-        "display": "inline-block",
-        "position": "relative",
-        "vertical-align":"top"
-    })
+    //title of the video
+    theyoutubebox.append('h2').text('How to view it')
+    // the youtube iframe
+    theyoutubebox.append('iframe')
+        .attrs({
+            "width": "560",
+            "height": "315",
+            "src": "https://www.youtube.com/embed/8gliqTh3Sig",
+            "frameborder": "0",
+            "allow": "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+            "allowfullscreen": null
+        })
+        .styles({
+            "margin-left": "50px",
+            "display": "inline-block",
+            "position": "relative",
+            "vertical-align": "top"
+        })
 }
 

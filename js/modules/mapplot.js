@@ -87,12 +87,39 @@ function step() {
     // currentValue = currentValue + (targetValue / 151); 
     currentValue = currentValue + distancePerStep; // moving forward by adding distance per step
     if (currentValue > targetValue) {
-      moving = false;
-      currentValue = 0;
-      clearInterval(timer);
-      // timer = 0;
-      playButton.text("Play");
-    //   console.log("Slider moving: " + moving);
+        moving = false;
+        currentValue = 0;
+        clearInterval(timer);
+        // timer = 0;
+        playButton.text("Play");
+        //   console.log("Slider moving: " + moving);
     }
-  }
-  
+}
+
+
+// set actions when the playButton is clicked
+playButton
+    .on("click", function () {
+        var button = d3.select(this);
+        if (button.text() == "Pause") {
+            moving = false;
+            clearInterval(timer);
+            // timer = 0;
+            button.text("Play");
+        } else {
+            moving = true;
+            timer = setInterval(step, 100);
+            button.text("Pause");
+        }
+        // console.log("Slider moving: " + moving);
+    })
+
+// set actions on slider events
+slider.call(
+    d3.drag()
+        .on("start.interrupt", function () { slider.interrupt(); })
+        .on("start drag", function () {
+            currentValue = d3.event.x;
+            sliderupdate(x.invert(currentValue));
+        })
+);

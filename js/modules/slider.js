@@ -1,6 +1,6 @@
 var moving = false;
 var currentValue = 0;
-var targetValue = width;
+var targetValue = width-margin.right;
 
 /* calculate the speed for playing:
   the whole distance of the timeline bar is 'targetValue'
@@ -56,11 +56,12 @@ var theticks = slider.insert("g", ".track-overlay")
 // add a handle for sliding 
 var handle = slider.insert("circle", ".track-overlay")
   .attr("class", "handle")
-  .attr("r", 9);
+  .attr("r", 9)
+  ;
 
 // add a label to indicate the current time
 var label = slider.append("text")
   .attr("class", "label")
-  .attr("text-anchor", "middle")
+  .attr("text-anchor", "left")
   .text(formatDateYMDH(startDate))
   .attr("transform", "translate(0," + (-25) + ")")
