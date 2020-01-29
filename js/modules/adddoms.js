@@ -6,14 +6,14 @@ thebody.append('h1')
     .styles({
         "text-align": "center"
     })
-    .text("The cases of novel choronavirus infection")
+    .text("Cases of the novel choronavirus infection in the world")
     .append('span')
     .attrs({ "id": "currenttimestamp" })
     .styles({
         "font-size": "12px",
         "font-weight": "normal"
     })
-    .html('   as of ' + Date())
+    .html('<br />   as of ' + Date())
 
 // subtitle: github link
 thebody.append('h3')
@@ -35,17 +35,43 @@ var thebigbox = thebody.append('div')
     })
 //the map area
 var themaparea = thebigbox.append('div')
-    .attrs({ "class": "maparea", "id": "vis" })
+    .attrs({ "class": "maparea", "id": "maparea" })
     .styles({
         "border-style": "none",
         "display": "inline-block",
         "position": "relative"
     })
+
+// add a svg to hold slider components    
+var slidersvg = d3.select("#maparea")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("class", "slidersvg")
+    ;
+
+// add g for plotting circles
+var sliderg = slidersvg.append("g")
+    .attr("class", "sliderg")
+  .attr("class", "leaflet-zoom-hide")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     
 //add a play button
 var playButton = themaparea.append('button')
     .attrs({"id":"play-button"})
     .text("Play")
+
+// add a div box to hold the map
+var mapbox = themaparea.append('div')
+    .attrs({
+        "id": "map"
+    })
+    .styles({
+        "width":"1000px",
+        "height": "600px"
+    })
+;
 
 function nt(){
 //the youtubebox
@@ -56,7 +82,8 @@ var theyoutubebox = thebigbox.append('div')
         "display": "inline-block",
         "position": "relative",
         "vertical-align":"top"
-    })
+});
+
 //title of the video
 theyoutubebox.append('h2').text('How to view it')
 // the youtube iframe
@@ -77,13 +104,3 @@ theyoutubebox.append('iframe')
     })
 }
 
-// add a svg to hold slider and map    
-var svg = d3.select("#vis")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
-
-// add g for plotting circles
-var plot = svg.append("g")
-  .attr("class", "plot")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");

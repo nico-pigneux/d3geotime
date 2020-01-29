@@ -24,7 +24,7 @@ function step() {
 function drawPlot(data) {
 
   // within plot(a g ele), bind data
-  var locations = plot.selectAll(".location").data(data);
+  var locations = bigg.selectAll(".location").data(data);
 
   // add circle to the plot
   // if filtered dataset has more circles than already existing, transition new ones in
@@ -56,10 +56,14 @@ function sliderupdate(h) {
   label
     .attr("x", x(h))
     .text(formatDateYMDH(h));
-
+  
   // filter data set and redraw plot
+  // var newData = dataset.filter(function (d) {
   var newData = dataset.filter(function (d) {
-    return d.date < h;
+    // console.log(d)
+    return d.time < h;
   })
-  drawPlot(newData);
+
+  displayNodes(newData);
+  
 }

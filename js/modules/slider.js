@@ -22,7 +22,7 @@ var x = d3.scaleTime()
   .clamp(true);
 
 // define the slider g component
-var slider = svg.append("g")
+var slider = slidersvg.append("g")
   .attr("class", "slider")
   .attr("transform", "translate(" + margin.left + "," + height / 5 + ")");
 

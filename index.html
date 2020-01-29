@@ -5,7 +5,7 @@
     <title>d3 leaflet map</title>
     <link rel="shortcut icon" href="#">
 
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/mapplot.css">
 
     <!-- d3 -->
     <script src="js/tools/d3/d3.v4.min.js"></script>
@@ -17,25 +17,32 @@
     <!-- dealing with time -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <!-- leaflet provider:    https://github.com/leaflet-extras/leaflet-providers -->
+    <script src="js/tools/leaflet/leaflet-providers.js"></script>
 </head>
 
 <body>
-    <!-- <div id="vis">
-        <button id="play-button">Play</button>
-    </div> -->
 
     <!-- add html dom elements -->
+    <script src="js/macros.js"></script>
+
     <script src="js/modules/initvars.js"></script>
     <script src="js/modules/adddoms.js"></script>
+
+    <!-- the initmap.js need a div with the id of 'map', which has to be added upfront (in adddoms.js) -->
+    <script src="js/modules/initmap.js"></script>
+
     <script src="js/modules/slider.js"></script>
-    <script src="js/modules/plot.js"></script>
+    <script src="js/modules/mapplot.js"></script>
 
-    <script src="js/test.js"></script>
+    <script src="js/main.js"></script>
 
-    <!-- <script src="js/modules/slider.js"></script> -->
-
-    <!-- <script src="js/testmodules/vars.js"></script> -->
-    <!-- <script src="js/testmodules/slider.js"></script>
-    <script src="js/testmodules/plot.js"></script> -->
 
 </body>
