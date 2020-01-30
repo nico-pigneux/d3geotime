@@ -5,7 +5,6 @@
 var anchorpointgps = [39.6243, 19.9217] // world center, near Greek
 var defaultzoom = 2;
 
-
 //create the map, set anchorpoint, and default zoom level
 // Note: need to careate a div with id='map' prior to this step
 var map = L.map('map').setView(anchorpointgps, defaultzoom);

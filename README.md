@@ -1,12 +1,21 @@
-based on 
+based on:
 
-d3 plotting on map
+Google Maps + D3
+https://bl.ocks.org/mbostock/899711
+
+Map using leaflet.js
+http://bl.ocks.org/d3noob/9267535
+
+d3 plotting on map (using Observable instead of plain js)
 https://observablehq.com/@sfu-iat355/intro-to-leaflet-d3-interactivity
 
-
 d3 timeline and play button
+http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8
 https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763
 
+
+branch v7
+rearranged legends
 
 as branch v6
 

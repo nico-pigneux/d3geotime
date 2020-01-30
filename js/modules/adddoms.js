@@ -182,7 +182,8 @@ theyoutubebox.append('iframe')
         "vertical-align": "top"
     })
 
-    theyoutubebox
+// links to download of data
+theyoutubebox
     .append("xhtml:a")
     .attr("href", "./data/cases.csv")
     .html("<br /><br /><br />download cases.csv")

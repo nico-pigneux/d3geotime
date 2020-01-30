@@ -24,7 +24,6 @@ d3.json("data/notused.json", function (collection) {
         d.id = i;
     })
 
-
 })
 
 

@@ -1,48 +1,50 @@
 var displayNodes = function (dataArray) {
-    
 
-    var recentdata= getRecent(dataArray);
+    // in the raw data (dataArray, data of a place is repeated for different time point)
+    // the following part is to have the most recent data for each place, so that each place will
+    // have a distinct set of data (e.g., # confirmed cases, etc), which will be used to determine the quantile categories
+    var recentdata = getRecent(dataArray);
     // console.log(recentdata)
 
     // get the recent confirmed
     var recentconfirmed = []
-    recentdata.forEach(d=>{
+    recentdata.forEach(d => {
         recentconfirmed.push(d.data[2])
     })
 
     var cutoff = getCutoff(recentconfirmed);
     // console.log(cutoff);
 
-    function getCutoff(A){
-        if (A.length > 5 ) { 
+    function getCutoff(A) {
+        if (A.length > 5) {
             return math.quantileSeq(A, [.5, .8, .95, .99])
         } else {
-            return [999999,999999,999999,999999]
-        }  
+            return [999999, 999999, 999999, 999999]
+        }
     }
-    
+
     //update legend
     // console.log(cutoff)
-    if (cutoff !== undefined && cutoff[0] !== 999999){
-    var i = 1
-    d3.selectAll('text.circlelegendtext').nodes().forEach(d=>{
-        // console.log(i)
-        if (i === 1){
-          var thestr = 'confirmed <' + cutoff[i-1].toFixed()  
-        } else if (i=== cutoff.length + 1) {
-            var thestr =  cutoff[i-2].toFixed() + "+"
-        }  else {
-            if (i > 1 && i < 5){
-                var thestr = cutoff[i-2].toFixed() + "-" + (cutoff[i-1]-1).toFixed()
+    if (cutoff !== undefined && cutoff[0] !== 999999) {
+        var i = 1
+        d3.selectAll('text.circlelegendtext').nodes().forEach(d => {
+            // console.log(i)
+            if (i === 1) {
+                var thestr = 'confirmed <' + cutoff[i - 1].toFixed()
+            } else if (i === cutoff.length + 1) {
+                var thestr = cutoff[i - 2].toFixed() + "+"
+            } else {
+                if (i > 1 && i < 5) {
+                    var thestr = cutoff[i - 2].toFixed() + "-" + (cutoff[i - 1] - 1).toFixed()
+                }
             }
-        }        
-        d3.select(d).text(thestr)
-        i = i+1
-    })
-}
+            d3.select(d).text(thestr)
+            i = i + 1
+        })
+    }
 
 
-      // delete existing g
+    // delete existing g. No need, excessive g components are removed by in the following exit() part
     // d3.selectAll('circle.confirmed').remove();
     // d3.selectAll('g.nodeg').remove();
 
@@ -58,33 +60,33 @@ var displayNodes = function (dataArray) {
         .attr("r", d => {
             if (d.data[6] === "Kathmandu") {
                 // console.log(d);
-                r= cat_r(d.data[2], cutoff, rcats );
-            }else {
-                r= cat_r(d.data[2], cutoff, rcats );
+                r = cat_r(d.data[2], cutoff, rcats);
+            } else {
+                r = cat_r(d.data[2], cutoff, rcats);
             }
             return r;
         })
         ;
 
 
-    // get the recent confirmed
+    // get the recent deceased
     var recentdeceased = []
-    recentdata.forEach(d=>{
+    recentdata.forEach(d => {
         recentdeceased.push(d.data[5])
     })
 
     var cutoffdeceased = getCutoff2(recentdeceased);
     // console.log(cutoffdeceased);
 
-    function getCutoff2(A){
-        if (A.length > 5 ) { 
+    function getCutoff2(A) {
+        if (A.length > 5) {
             return math.quantileSeq(A, [.8, .95, .99])
         } else {
-            return [999999,999999,999999]
-        }  
+            return [999999, 999999, 999999]
+        }
     }
 
-    function cat_r3 (ncases, cutoffv, rcatsv ) {
+    function cat_r3(ncases, cutoffv, rcatsv) {
 
         // console.log(ncases) // e.g., 1
         // console.log(cutoffv) // e.g., 0, 1, 55.6
@@ -100,13 +102,13 @@ var displayNodes = function (dataArray) {
         //     r=rcatsv[2]
         // }
 
-        if (ncases===0){ r= 0 }
+        if (ncases === 0) { r = 0 }
         else if (ncases <= 1) {
             r = rcatsv[0]
-        } else if (ncases <=55) {
-            r=rcatsv[1]
+        } else if (ncases <= 55) {
+            r = rcatsv[1]
         } else {
-            r=rcatsv[2]
+            r = rcatsv[2]
         }
 
 
@@ -115,30 +117,29 @@ var displayNodes = function (dataArray) {
         return r;
     }
 
-    // bind deceased cases of a location to circles
+    // bind deceased cases of a location to 
     var deceasedcasenodes = nodegs.append('rect')
         .attr("class", 'deceased')
-        .attr("width", 
+        .attr("width",
             d => {
-            if (d.data[6] === "Shanghai") {
-                //  console.log(d.data);
-                 var w = cat_r3(d.data[5], cutoffdeceased, scats);
-                //  console.log (w);
-            }else {
-                var w = cat_r3(d.data[5], cutoffdeceased, scats);
+                if (d.data[6] === "Shanghai") {
+                    //  console.log(d.data);
+                    var w = cat_r3(d.data[5], cutoffdeceased, scats);
+                    //  console.log (w);
+                } else {
+                    var w = cat_r3(d.data[5], cutoffdeceased, scats);
+                }
+                return w;
             }
-            return w;
-        }
         )
         .attr("height", d => {
             var w = cat_r3(d.data[5], cutoffdeceased, scats);
             return w;
         })
         ;
-        
 
 
-
+    // update the position on  the map
     function updatenodes() {
 
         nodegs.attr("transform",
@@ -152,6 +153,7 @@ var displayNodes = function (dataArray) {
         )
     }
 
+    updatenodes();
 
     // on reset, update the map, for leaflet v 0.7 and earlier
     // map.on("viewreset", update);
@@ -160,7 +162,7 @@ var displayNodes = function (dataArray) {
     // on zoomend, update the map, for leaflet v1.0 +
     //https://observablehq.com/@sfu-iat355/introduction-to-leaflet-and-d3
     map.on("zoomend", updatenodes);
-    updatenodes();
+    
 
     // get the binded nodes
     // Note: must be put here (after running updatenodes() )
@@ -234,7 +236,7 @@ slider.call(
     d3.drag()
         .on("start.interrupt", function () { slider.interrupt(); })
         .on("start drag", function () {
-            currentValue = d3.event.x;
+            currentValue = d3.event.x; // get the x poistion of the mouse
             sliderupdate(x.invert(currentValue));
         })
 );
