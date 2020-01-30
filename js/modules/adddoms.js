@@ -137,7 +137,7 @@ legendsvg.selectAll('g.legendrectg').nodes().forEach(d=>{
     d3.select(d).append('text')
     .text(d=>{
         if (i ===0) {
-            return "death:0-1"
+            return "death:1"
         } else if (i ===1){
             return "2-54"
         } else {
