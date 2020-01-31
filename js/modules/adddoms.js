@@ -237,16 +237,17 @@ var hchart1 = chartbox.append('div')
     // "overflow": "auto",
     // "border-width":"1px"
 })
-.html("<h2>Number of confirmed and death cases in Hubei (including Wuhan), China </h2>")
+.html("<h2>Number of confirmed and death cases in Mainland China, and Hubei (including Wuhan)</h2>")
 ;
 // the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
 var hchart1a = hchart1.append('div')
 .attrs({ 
     "class": "hstack",
-    "id":"hubei"
+    "id":"cnhubi"
 })
 .styles({
     "border-style": "solid",
+    "border-color":"lightblue",
     "width":"1000px",
     "height":'250px',
     // "resize": "both",
@@ -276,6 +277,7 @@ var hchart2a = hchart2.append('div')
 })
 .styles({
     "border-style": "solid",
+    "border-color":"lightblue",
     "width":"1000px",
     "height":'700px',
     // "resize": "both",
@@ -305,6 +307,7 @@ var hchart3a = hchart3.append('div')
 })
 .styles({
     "border-style": "solid",
+    "border-color":"lightblue",
     "width":"1000px",
     "height":'600px',
     // "resize": "both",

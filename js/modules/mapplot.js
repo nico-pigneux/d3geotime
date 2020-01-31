@@ -36,7 +36,7 @@ var displayNodes = function (dataArray) {
                 hubei_hchart.push(d)
             }
         });
-        hbar(hubei_hchart, 'hubei', hchart1a);
+        // hbar(hubei_hchart, 'hubei', hchart1a);
 
         // get data of china provinces except hubei
         var elsecn_hchart = [];
@@ -75,7 +75,6 @@ var displayNodes = function (dataArray) {
         // rename country as place
         recentdata_hchart_bycountry.forEach(function (data) {
             data['place'] = data['country'];
-            delete data['country'];
         });
 
         // sort by confirmed cases descendingly
@@ -83,15 +82,26 @@ var displayNodes = function (dataArray) {
             return a.count - b.count
         }).reverse()
 
+        // push main land china to recentdata_hchart_incnm, outside mainland to outcnm
         var recentdata_hchart_outcnm =[];
+        var recentdata_hchart_incnm =[];
         recentdata_hchart_bycountry.forEach(d=>{
             if (d.place !== 'Mainland China') {
                 recentdata_hchart_outcnm.push(d)
+            } else {
+                recentdata_hchart_incnm.push(d)
             }
         })
+        
+        // includ hubei in incnm
+        // console.log(hubei_hchart)
+        // console.log(recentdata_hchart_incnm)
+        hubei_hchart.forEach(d=>{
+            recentdata_hchart_incnm.push(d)
+        })        
+        hbar(recentdata_hchart_incnm, 'cnhubi', hchart1a);
 
         // console.log(recentdata_hchart_outcnm)
-
         hbar(recentdata_hchart_outcnm, 'outcn',hchart3a );
     }
 
