@@ -32,29 +32,48 @@ var thebigbox = thebody.append('div')
     .attrs({ "class": "bigbox" })
     .styles({
         "border-style": "none",
-        "margin-left": "50px"
+        "margin-left": "50px",
+        "margin-top": "50px"
     })
 //the map area
 var themaparea = thebigbox.append('div')
-    .attrs({ "class": "maparea", "id": "maparea" })
+    .attrs({ "class": "maparea", "id": "maparea"  })
     .styles({
-        "border-style": "none",
+
+        "border-style":"solid", 
+        "border-width":"1px", 
+        "border-color":"lightblue",
+        "display": "inline-block",
+        "position": "relative"
+    })
+
+var sliderbox = themaparea.append('div')
+    .attrs({ "class": "sliderbox", "id": "sliderbox"  })
+    .styles({
+        "width":"900",
+        "border-style":"none", 
+        "border-width":"0px", 
         "display": "inline-block",
         "position": "relative"
     })
 
 // add a svg to hold slider components    
-var slidersvg = d3.select("#maparea")
+var slidersvg =sliderbox
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", width + margin.left + margin.right )
     .attr("height", height + margin.top + margin.bottom)
     .attr("class", "slidersvg")
     ;
 
 //add a play button
 var playbuttonbox = themaparea.append('div')
-    .styles({"height":"50px"})
-    ;
+    .styles({
+    "width":"100px",
+    "height":"100px", 
+    "display": "inline-block",
+    "position": "relative",
+    "vertical-align": "top"
+});
 var playButton = playbuttonbox.append('button')
     .attrs({ "id": "play-button" })
     .text("Play")
@@ -72,7 +91,8 @@ var mapbox = themaparea.append('div')
 // add a box to hold legends
 var legendbox =  themaparea.append('div')
     .attrs({"id": "legendbox"})
-var legendsvg=legendbox.append('svg').attrs({"class":"legendsvg", "width":"1000px"})
+    .styles({"border-style":"solid","border-width":"0px", "border-color":"lightblue"})
+var legendsvg=legendbox.append('svg').attrs({"class":"legendsvg", "width":"1000px", "height":"100px"})
 
 
 var i =0
@@ -118,11 +138,11 @@ scats.forEach(d=>{
         .attr("class", 'legendrectg')
         .attr("transform", ()=>{
         if (i===0){
-            offseth = 50;
+            offseth = 550;
         } else {
-            offseth = i * 100//offseth + (rcats[i-1] + rcats[i])*4 +20
+            offseth = i * 100+500//offseth + (rcats[i-1] + rcats[i])*4 +20
         }
-        var offsetv = scats[scats.length-1] - d + 100
+        var offsetv = scats[scats.length-1] - d + 50
         // console.log(i)
         return "translate (" + (offseth) + "," + offsetv +")"
     })
@@ -164,7 +184,7 @@ var theyoutubebox = thebigbox.append('div')
     });
 
 //title of the video
-theyoutubebox.append('h2').html('<br /><br /><br /><br /><br />How to view it')
+theyoutubebox.append('h2').html('How to view it') //<br /><br /><br /><br /><br />
 // the youtube iframe
 theyoutubebox.append('iframe')
     .attrs({
@@ -188,6 +208,110 @@ theyoutubebox
     .attr("href", "./data/cases.csv")
     .html("<br /><br /><br />download cases.csv")
     ;
+
+// insert a box for charts
+var chartbox = thebody.append('div')
+.attrs({ 
+    "class": "chartbox",
+    "id":"charts"
+})
+.styles({
+    "border-style": "none",
+    "margin-left": "50px",
+    "width":"1000px"
+    // "height":"1500px"
+})
+;
+
+var hchart1 = chartbox.append('div')
+.attrs({ 
+    "class": "byplaceholder",
+})
+.styles({
+    // "border-style": "solid",
+    "width":"1000px",
+    // "height":'100px',
+    "display": "inline-block",
+    "position": "relative"
+    // "resize": "both",
+    // "overflow": "auto",
+    // "border-width":"1px"
+})
+.html("<h2>Number of confirmed and death cases in Hubei (including Wuhan), China </h2>")
+;
+// the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
+var hchart1a = hchart1.append('div')
+.attrs({ 
+    "class": "hstack",
+    "id":"hubei"
+})
+.styles({
+    "border-style": "solid",
+    "width":"1000px",
+    "height":'250px',
+    // "resize": "both",
+    // "overflow": "auto",
+    "border-width":"1px"
+})
+;
+
+var hchart2 = chartbox.append('div')
+.attrs({ 
+    "class": "byplaceholder",
+})
+.styles({
+    // "border-style": "solid",
+    "width":"1000px",
+    // "resize": "both",
+    // "overflow": "auto",
+    // "border-width":"1px",
+})
+.html("<h2>Number of confirmed and death cases in Mainland China (except Hubei)</h2>")
+;
+// the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
+var hchart2a = hchart2.append('div')
+.attrs({ 
+    "class": "hstack",
+    "id":"elsecn"
+})
+.styles({
+    "border-style": "solid",
+    "width":"1000px",
+    "height":'700px',
+    // "resize": "both",
+    // "overflow": "auto",
+    "border-width":"1px"
+})
+;
+
+var hchart3 = chartbox.append('div')
+.attrs({ 
+    "class": "byplaceholder",
+})
+.styles({
+    // "border-style": "solid",
+    "width":"1000px",
+    // "resize": "both",
+    // "overflow": "auto",
+    // "border-width":"1px",
+})
+.html("<h2>Number of confirmed and death cases outside Mainland China</h2>")
+;
+// the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
+var hchart3a = hchart3.append('div')
+.attrs({ 
+    "class": "hstack",
+    "id":"outcn"
+})
+.styles({
+    "border-style": "solid",
+    "width":"1000px",
+    "height":'600px',
+    // "resize": "both",
+    // "overflow": "auto",
+    "border-width":"1px"
+})
+;
 
 
 // copyright box

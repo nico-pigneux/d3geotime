@@ -4,7 +4,98 @@ var displayNodes = function (dataArray) {
     // the following part is to have the most recent data for each place, so that each place will
     // have a distinct set of data (e.g., # confirmed cases, etc), which will be used to determine the quantile categories
     var recentdata = getRecent(dataArray);
-    // console.log(recentdata)
+    
+
+    // sum with country,place confirmed, and death
+    var recentdata_hchart = [];
+    recentdata.forEach(d => {
+        var tmp1 = {};
+        tmp1.country = d.data[7]
+        tmp1.place = d.data[6]
+        tmp1.datacat = 'confirmed'
+        tmp1.count = d.data[2]
+        recentdata_hchart.push(tmp1)
+        var tmp2 = {};
+        tmp2.country = d.data[7]
+        tmp2.place = d.data[6]
+        tmp2.datacat = 'death'
+        tmp2.count = d.data[5]
+        recentdata_hchart.push(tmp2)
+    })
+
+    // console.log(recentdata_hchart)
+
+
+    // console.log(hubei_hchart)
+    if (recentdata_hchart.length > 0 && recentdata_hchart !== undefined && recentdata_hchart !== null) {
+
+        // get data of hubei
+        var hubei_hchart = [];
+        recentdata_hchart.forEach(d => {
+            if (d.place==='Hubei') {
+                hubei_hchart.push(d)
+            }
+        });
+        hbar(hubei_hchart, 'hubei', hchart1a);
+
+        // get data of china provinces except hubei
+        var elsecn_hchart = [];
+        recentdata_hchart.forEach(d => {
+            if (d.place!=='Hubei' && d.country==="Mainland China"  ) {
+                elsecn_hchart.push(d)
+            }
+        });
+
+        // sort by confirmed cases descendingly
+        elsecn_hchart.sort(function (a, b) {
+            return a.count - b.count
+        }).reverse()
+
+        // console.log(elsecn_hchart)
+
+        hbar(elsecn_hchart, 'elsecn', hchart2a);
+    }
+
+    // get data outside mainland china
+    if (recentdata_hchart.length > 0 && recentdata_hchart !== undefined && recentdata_hchart !== null) {
+        
+        // sum by country and datacat
+        //https://stackoverflow.com/questions/46794232/group-objects-by-multiple-properties-in-array-then-sum-up-their-values
+        var recentdata_hchart_bycountry = Object.values(
+            recentdata_hchart.reduce(function (r, e) {
+                var key = e.country + '|' + e.datacat;
+                if (!r[key]) r[key] = e;
+                else {
+                    r[key].count += e.count;
+                }
+                return r;
+            }, {})
+        )
+
+        // rename country as place
+        recentdata_hchart_bycountry.forEach(function (data) {
+            data['place'] = data['country'];
+            delete data['country'];
+        });
+
+        // sort by confirmed cases descendingly
+        recentdata_hchart_bycountry.sort(function (a, b) {
+            return a.count - b.count
+        }).reverse()
+
+        var recentdata_hchart_outcnm =[];
+        recentdata_hchart_bycountry.forEach(d=>{
+            if (d.place !== 'Mainland China') {
+                recentdata_hchart_outcnm.push(d)
+            }
+        })
+
+        // console.log(recentdata_hchart_outcnm)
+
+        hbar(recentdata_hchart_outcnm, 'outcn',hchart3a );
+    }
+
+
 
     // get the recent confirmed
     var recentconfirmed = []
@@ -162,7 +253,7 @@ var displayNodes = function (dataArray) {
     // on zoomend, update the map, for leaflet v1.0 +
     //https://observablehq.com/@sfu-iat355/introduction-to-leaflet-and-d3
     map.on("zoomend", updatenodes);
-    
+
 
     // get the binded nodes
     // Note: must be put here (after running updatenodes() )

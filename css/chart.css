@@ -1,0 +1,14 @@
+#byplace {
+    width: 50%;
+    height: 50%;
+    margin: 0;
+    padding: 10;
+  }
+  
+  #byplace>svg {
+    display: block;
+  }
+
+.i-role-label {
+    font-size: 40px;
+}

@@ -6,8 +6,8 @@ body {
 
 #play-button {
   position: absolute;
-  top: 100px;
-  left: 50px;
+  top: 35px;
+  left: 10px;
   background: #f08080;
   padding-right: 26px;
   border-radius: 3px;

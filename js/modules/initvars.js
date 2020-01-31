@@ -20,7 +20,7 @@ var
 
 // size of the slider box
 var margin = {top:0, right:50, bottom:0, left:10},
-    width = 1000 - margin.left - margin.right,
+    width = 900 - margin.left - margin.right,
     height = 100 - margin.top - margin.bottom;
 
 // the global var for plot data

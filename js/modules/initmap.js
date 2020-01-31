@@ -2,7 +2,7 @@
 // leaflet setting
 // set the center point 
 // var anchorpointgps = [30.5928, 114.3055] //(Wuhan, China)
-var anchorpointgps = [39.6243, 19.9217] // world center, near Greek
+var anchorpointgps = [20.6243, 19.9217] // world center, near Greek
 var defaultzoom = 2;
 
 //create the map, set anchorpoint, and default zoom level
