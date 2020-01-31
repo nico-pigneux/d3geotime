@@ -184,23 +184,37 @@ var theyoutubebox = thebigbox.append('div')
     });
 
 //title of the video
-theyoutubebox.append('h2').html('How to view it') //<br /><br /><br /><br /><br />
-// the youtube iframe
-theyoutubebox.append('iframe')
-    .attrs({
-        "width": "560",
-        "height": "315",
-        "src": "https://www.youtube.com/embed/8gliqTh3Sig",
-        "frameborder": "0",
-        "allow": "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
-        "allowfullscreen": null
-    })
+theyoutubebox.append('span').html('number of confirmed cases<br />') //<br /><br /><br /><br /><br />
+theyoutubebox.append('span').attrs({"id":"totalconfirmed"})
     .styles({
-        "margin-left": "0px",
-        "display": "inline-block",
-        "position": "relative",
-        "vertical-align": "top"
+        "font-size":"160px", 
+        'font-weight': 'bold',
+        'color':"red"
     })
+theyoutubebox.append('span').html('<br />number of death<br />') //<br /><br /><br /><br /><br />
+theyoutubebox.append('span').attrs({"id":"totaldeath"})
+    .styles({
+        "font-size":"160px",
+        'font-weight': 'bold',
+        'color':"black"
+    })
+
+// // the youtube iframe
+// theyoutubebox.append('iframe')
+//     .attrs({
+//         "width": "560",
+//         "height": "315",
+//         "src": "https://www.youtube.com/embed/8gliqTh3Sig",
+//         "frameborder": "0",
+//         "allow": "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+//         "allowfullscreen": null
+//     })
+//     .styles({
+//         "margin-left": "0px",
+//         "display": "inline-block",
+//         "position": "relative",
+//         "vertical-align": "top"
+//     })
 
 // links to download of data
 theyoutubebox

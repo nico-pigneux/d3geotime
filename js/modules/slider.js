@@ -1,6 +1,6 @@
 var moving = false;
 var currentValue = 0;
-var targetValue = width-margin.right;
+var targetValue = width - margin.right;
 
 /* calculate the speed for playing:
   the whole distance of the timeline bar is 'targetValue'
@@ -9,8 +9,8 @@ var targetValue = width-margin.right;
 var lengthOfPlay = endDate - startDate; // in ms (1 day = 24*60*60*1000 ms)
 // console.log(lengthOfPlay/60/60/1000/24)
 // if it is to play at 6 hours per step, then it'll took 
-var nSteps = (lengthOfPlay /1000 /60 /60) / hoursPerInterval;
-nSteps= Math.floor(nSteps)
+var nSteps = (lengthOfPlay / 1000 / 60 / 60) / hoursPerInterval;
+nSteps = Math.floor(nSteps)
 // Given that the whole distance of the timeline bar is 'targetValue'
 // each step will take the distance of:
 var distancePerStep = targetValue / nSteps;
@@ -37,7 +37,7 @@ slider.append("line")
   // .select(function () { return this.parentNode.appendChild(this.cloneNode(true)); })
   // .attr("class", "track-overlay")
   ;
-  
+
 
 // add timeline ticks
 var theticks = slider.insert("g", ".track-overlay")
@@ -52,7 +52,7 @@ var theticks = slider.insert("g", ".track-overlay")
   .attr("text-anchor", "middle")
   // .text(function (d) { return formatDateIntoYear(d); });
   .text(function (d) { return formatDateYMD(d); });
-  
+
 // add a handle for sliding 
 var handle = slider.insert("circle", ".track-overlay")
   .attr("class", "handle")

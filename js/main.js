@@ -24,6 +24,26 @@ d3.json("data/notused.json", function (collection) {
         d.id = i;
     })
 
+    // calculate the total confirmed and death cases
+
+    var recentdata1 = getRecent(dataset);
+
+    // get confirmed, and death cases by region and place (e.g., by country and province)
+    var totalconfirmed = 0, totaldeath = 0;
+    recentdata1.forEach(d => {
+
+        totalconfirmed = totalconfirmed + d.data[2]
+        // console.log(totalconfirmed)
+
+        totaldeath = totaldeath + d.data[5]
+    })
+
+    //post the total numbers
+    // console.log(totalconfirmed)
+    d3.select('#totalconfirmed').text(totalconfirmed)
+    d3.select('#totaldeath').text(totaldeath)
+
+
 })
 
 

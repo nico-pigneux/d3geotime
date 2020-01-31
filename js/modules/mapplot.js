@@ -4,9 +4,9 @@ var displayNodes = function (dataArray) {
     // the following part is to have the most recent data for each place, so that each place will
     // have a distinct set of data (e.g., # confirmed cases, etc), which will be used to determine the quantile categories
     const recentdata = getRecent(dataArray);
-    
 
-    // sum with region,place confirmed, and death
+
+    // get confirmed, and death cases by region and place (e.g., by country and province)
     const recentdata_hchart = [];
     recentdata.forEach(d => {
         const tmp1 = {};
@@ -14,14 +14,12 @@ var displayNodes = function (dataArray) {
         tmp1.place = d.data[6]
         tmp1.datacat = 'confirmed'
         tmp1.count = d.data[2]
-        tmp1.time-d.time
         recentdata_hchart.push(tmp1)
         const tmp2 = {};
         tmp2.region = d.data[7]
         tmp2.place = d.data[6]
         tmp2.datacat = 'death'
         tmp2.count = d.data[5]
-        tmp2.time-d.time
         recentdata_hchart.push(tmp2)
     })
 
@@ -34,7 +32,7 @@ var displayNodes = function (dataArray) {
         // get data of hubei
         const hubei_hchart = [];
         recentdata_hchart.forEach(d => {
-            if (d.place==='Hubei') {
+            if (d.place === 'Hubei') {
                 hubei_hchart.push(d)
             }
         });
@@ -44,7 +42,7 @@ var displayNodes = function (dataArray) {
         const elsecn_hchart = [];
         recentdata_hchart.forEach(d => {
             // console.log (d)
-            if (d.place!=='Hubei'  && d.region==="Mainland China"  ) {
+            if (d.place !== 'Hubei' && d.region === "Mainland China") {
                 elsecn_hchart.push(d)
             }
         });
@@ -56,63 +54,63 @@ var displayNodes = function (dataArray) {
 
 
         hbar(elsecn_hchart, 'elsecn', hchart2a);
- 
+
 
         //get data out side china mainland
-        
+
         // // sum by region and datacat
-        var region_confirmed=[]
-        var region_death=[]
-        recentdata_hchart.forEach(d=>{
-                var tmp={};
-                tmp.region = d.region
-                tmp.count=d.count
-                tmp.datacat=d.datacat
-            if (d.datacat==="confirmed"){
+        var region_confirmed = []
+        var region_death = []
+        recentdata_hchart.forEach(d => {
+            var tmp = {};
+            tmp.region = d.region
+            tmp.count = d.count
+            tmp.datacat = d.datacat
+            if (d.datacat === "confirmed") {
                 region_confirmed.push(tmp)
             } else {
-                region_death.push(tmp)               
-            }            
+                region_death.push(tmp)
+            }
         })
         // console.log(region_confirmed)
         // console.log(region_death)
 
         // sum confirmed cases by region
-        var theregions=[];
-        var sumbyregion_c={}
-        region_confirmed.forEach(d=>{
-            if (!theregions.includes(d.region) ){
+        var theregions = [];
+        var sumbyregion_c = {}
+        region_confirmed.forEach(d => {
+            if (!theregions.includes(d.region)) {
                 theregions.push(d.region)
-                sumbyregion_c[d.region]=d.count
+                sumbyregion_c[d.region] = d.count
             } else {
-                sumbyregion_c[d.region]=sumbyregion_c[d.region] + d.count
+                sumbyregion_c[d.region] = sumbyregion_c[d.region] + d.count
             }
         })
         // console.log(sumbyregion_c)
 
-        var theregions=[];
-        var sumbyregion_d={}
-        region_death.forEach(d=>{
-            if (!theregions.includes(d.region) ){
+        var theregions = [];
+        var sumbyregion_d = {}
+        region_death.forEach(d => {
+            if (!theregions.includes(d.region)) {
                 theregions.push(d.region)
-                sumbyregion_d[d.region]=d.count
+                sumbyregion_d[d.region] = d.count
             } else {
-                sumbyregion_d[d.region]=sumbyregion_d[d.region] + d.count
+                sumbyregion_d[d.region] = sumbyregion_d[d.region] + d.count
             }
         })
         // console.log(sumbyregion_d)
 
 
-        var sumbyregion_cd=[];
-        theregions.forEach(d=>{
-            sumbyregion_cd.push ({
+        var sumbyregion_cd = [];
+        theregions.forEach(d => {
+            sumbyregion_cd.push({
                 place: d,
-                count:sumbyregion_c[d],
+                count: sumbyregion_c[d],
                 datacat: "confirmed"
             })
-            sumbyregion_cd.push ({
+            sumbyregion_cd.push({
                 place: d,
-                count:sumbyregion_d[d],
+                count: sumbyregion_d[d],
                 datacat: "death"
             })
         })
@@ -120,35 +118,51 @@ var displayNodes = function (dataArray) {
 
         // // // sort by confirmed cases descendingly
         sumbyregion_cd.sort(function (a, b) {
-             return a.count - b.count
+            return a.count - b.count
         }).reverse()
 
         // // // push main land china to recentdata_hchart_incnm, outside mainland to outcnm
-        var recentdata_hchart_outcnm =[];
-        var recentdata_hchart_incnm =[];
-        sumbyregion_cd.forEach(d=>{
+        var recentdata_hchart_outcnm = [];
+        var recentdata_hchart_incnm = [];
+        var totalconfirmed = 0, totaldeath = 0;
+        sumbyregion_cd.forEach(d => {
+            // console.log(d)
+            // console.log(d.count)
             if (d.place !== 'Mainland China') {
                 recentdata_hchart_outcnm.push(d)
             } else {
                 recentdata_hchart_incnm.push(d)
             }
+
+            if (d.datacat === "confirmed") {
+                totalconfirmed = totalconfirmed + d.count
+                // console.log(totalconfirmed)
+            } else {
+                totaldeath = totaldeath + d.count
+            }
         })
 
+        //post the total numbers
+        // console.log(totalconfirmed)
+        d3.select('#totalconfirmed').text(totalconfirmed)
+        d3.select('#totaldeath').text(totaldeath)
+
+
         // add the region name of 'Mainland China'
-        recentdata_hchart_incnm.forEach(d=>{
-            d.region=d.place
+        recentdata_hchart_incnm.forEach(d => {
+            d.region = d.place
         })
-        
+
         // // includ hubei in incnm
         // // console.log(hubei_hchart)
         // console.log(recentdata_hchart_incnm)
-        hubei_hchart.forEach(d=>{
+        hubei_hchart.forEach(d => {
             recentdata_hchart_incnm.push(d)
-        })        
+        })
         hbar(recentdata_hchart_incnm, 'cnhubi', hchart1a);
 
         // // console.log(recentdata_hchart_outcnm)
-        hbar(recentdata_hchart_outcnm, 'outcn',hchart3a );
+        hbar(recentdata_hchart_outcnm, 'outcn', hchart3a);
     }
 
 
