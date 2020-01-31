@@ -174,36 +174,37 @@ legendsvg.selectAll('g.legendrectg').nodes().forEach(d=>{
                
 
 //the youtubebox
-var theyoutubebox = thebigbox.append('div')
+var thetotalnumbox = thebigbox.append('div')
     .attrs({ "class": "youtubebox" })
     .styles({
-        "margin-left": "50px",
+        "margin-left": "100px",
         "display": "inline-block",
         "position": "relative",
-        "vertical-align": "top"
+        "vertical-align": "top",
+        "text-align":"center"
     });
 
 //title of the video
-theyoutubebox.append('span').html('number of confirmed cases<br />')
+thetotalnumbox.append('span').html('number of confirmed cases<br />')
     .styles({
         // "font-family":"Source Sans Pro",
         "font-weight":"400",
         "font-size":"15px"
     }) //<br /><br /><br /><br /><br />
-theyoutubebox.append('span').attrs({"id":"totalconfirmed"})
+thetotalnumbox.append('span').attrs({"id":"totalconfirmed"})
     .styles({
         "font-family":"Bebas Neue",
         "font-size":"160px", 
         'font-weight': 'bold',
         'color':"red"
     })
-theyoutubebox.append('span').html('<br />number of death<br />')
+thetotalnumbox.append('span').html('<br />number of death<br />')
 .styles({
     // "font-family":"Source Sans Pro",
     "font-weight":"400",
     "font-size":"15px"
 }) //<br /><br /><br /><br /><br />
-theyoutubebox.append('span').attrs({"id":"totaldeath"})
+thetotalnumbox.append('span').attrs({"id":"totaldeath"})
     .styles({
         "font-family":"Bebas Neue",
         "font-size":"160px",
@@ -212,7 +213,7 @@ theyoutubebox.append('span').attrs({"id":"totaldeath"})
     })
 
 // // the youtube iframe
-// theyoutubebox.append('iframe')
+// thetotalnumbox.append('iframe')
 //     .attrs({
 //         "width": "560",
 //         "height": "315",
@@ -229,7 +230,7 @@ theyoutubebox.append('span').attrs({"id":"totaldeath"})
 //     })
 
 // links to download of data
-theyoutubebox
+thetotalnumbox
     .append("xhtml:a")
     .attr("href", "./data/cases.csv")
     .html("<br /><br /><br />download cases.csv")
