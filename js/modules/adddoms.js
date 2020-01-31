@@ -184,16 +184,28 @@ var theyoutubebox = thebigbox.append('div')
     });
 
 //title of the video
-theyoutubebox.append('span').html('number of confirmed cases<br />') //<br /><br /><br /><br /><br />
+theyoutubebox.append('span').html('number of confirmed cases<br />')
+    .styles({
+        // "font-family":"Source Sans Pro",
+        "font-weight":"400",
+        "font-size":"15px"
+    }) //<br /><br /><br /><br /><br />
 theyoutubebox.append('span').attrs({"id":"totalconfirmed"})
     .styles({
+        "font-family":"Bebas Neue",
         "font-size":"160px", 
         'font-weight': 'bold',
         'color':"red"
     })
-theyoutubebox.append('span').html('<br />number of death<br />') //<br /><br /><br /><br /><br />
+theyoutubebox.append('span').html('<br />number of death<br />')
+.styles({
+    // "font-family":"Source Sans Pro",
+    "font-weight":"400",
+    "font-size":"15px"
+}) //<br /><br /><br /><br /><br />
 theyoutubebox.append('span').attrs({"id":"totaldeath"})
     .styles({
+        "font-family":"Bebas Neue",
         "font-size":"160px",
         'font-weight': 'bold',
         'color':"black"
