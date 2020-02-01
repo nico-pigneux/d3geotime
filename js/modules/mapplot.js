@@ -354,6 +354,13 @@ function sliderupdate(h) {
         // console.log(d)
         return d.time < h;
     })
+    // check the the currentValue and targetValue (indicating the position of the handle in the timeline bar)
+    // if currentValue is greater than half of the target value, change the handlelabel's anchor to 'end' (ie right align)
+    if (currentValue/targetValue > 0.5){
+        d3.select('text.handlelabel').attr("text-anchor", "end")
+    } else {
+        d3.select('text.handlelabel').attr("text-anchor", "start")
+    }
 
     displayNodes(newData);
 
@@ -364,7 +371,8 @@ function step() {
     sliderupdate(x.invert(currentValue));
     // currentValue = currentValue + (targetValue / 151); 
     currentValue = currentValue + distancePerStep; // moving forward by adding distance per step
-    if (currentValue > targetValue) {
+    // if (currentValue > targetValue ) {  // not right! the last step could be slight over the target value, but has to move for it, otherwise the handler has not reach the end
+    if ((currentValue - targetValue) > distancePerStep ) { // can be larger than targetValue, as long as the currentValue is not over for more than a unit of distancePerStep
         moving = false;
         currentValue = 0;
         clearInterval(timer);

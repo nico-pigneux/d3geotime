@@ -237,7 +237,7 @@ function getdailydata(thelink, id) {
 }// end function getdailydata()
 
 
-getwhosarsdatalinks();
+// getwhosarsdatalinks();
 
 
 

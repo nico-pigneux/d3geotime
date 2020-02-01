@@ -61,7 +61,7 @@ var handle = slider.insert("circle", ".track-overlay")
 
 // add a label to indicate the current time
 var label = slider.append("text")
-  .attr("class", "label")
+  .attr("class", "handlelabel")
   .attr("text-anchor", "left")
   .text(formatDateYMDH(startDate))
   .attr("transform", "translate(0," + (-25) + ")")
