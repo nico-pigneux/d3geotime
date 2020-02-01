@@ -173,7 +173,7 @@ legendsvg.selectAll('g.legendrectg').nodes().forEach(d=>{
 })
                
 
-//the youtubebox
+//the total number box
 var thetotalnumbox = thebigbox.append('div')
     .attrs({ "class": "youtubebox" })
     .styles({
@@ -250,6 +250,39 @@ var chartbox = thebody.append('div')
 })
 ;
 
+
+var lchart1 = chartbox.append('div')
+.attrs({ 
+    "class": "bytimeholder",
+})
+.styles({
+    // "border-style": "solid",
+    "width":"1000px",
+    // "resize": "both",
+    // "overflow": "auto",
+    // "border-width":"1px",
+})
+.html("<h2>Number of confirmed cases over time (Blue: 2019-nCoV; Red: 2013-SARS)</h2>")
+;
+// the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
+var lchart1a = lchart1.append('div')
+.attrs({ 
+    "class": "linechart",
+    "id":"linetotal"
+})
+.styles({
+    "border-style": "solid",
+    "border-color":"lightblue",
+    "width":"1000px",
+    "height":'300px',
+    // "resize": "both",
+    // "overflow": "auto",
+    "border-width":"1px"
+})
+;
+
+
+
 var hchart1 = chartbox.append('div')
 .attrs({ 
     "class": "byplaceholder",
@@ -270,7 +303,7 @@ var hchart1 = chartbox.append('div')
 var hchart1a = hchart1.append('div')
 .attrs({ 
     "class": "hstack",
-    "id":"cnhubi"
+    "id":"cnhubei"
 })
 .styles({
     "border-style": "solid",
@@ -342,6 +375,7 @@ var hchart3a = hchart3.append('div')
     "border-width":"1px"
 })
 ;
+
 
 
 // copyright box

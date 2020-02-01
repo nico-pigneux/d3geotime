@@ -13,8 +13,13 @@ d3 timeline and play button
 http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8
 https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763
 
+branch v10
+add line chart comparing NV and SARS cases
+
 branch v9
 add functions to download SARS data from WHO
+change the handle label (make it align right when reaching the end)
+change the function checking the point to stop playing, fixed the original bug (in sliderupdate())
 
 branch v8
 adding stacked bars using Tauchart.

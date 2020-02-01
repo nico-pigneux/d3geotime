@@ -159,7 +159,7 @@ var displayNodes = function (dataArray) {
         hubei_hchart.forEach(d => {
             recentdata_hchart_incnm.push(d)
         })
-        hbar(recentdata_hchart_incnm, 'cnhubi', hchart1a);
+        hbar(recentdata_hchart_incnm, 'cnhubei', hchart1a);
 
         // // console.log(recentdata_hchart_outcnm)
         hbar(recentdata_hchart_outcnm, 'outcn', hchart3a);

@@ -43,7 +43,11 @@ d3.json("data/notused.json", function (collection) {
     d3.select('#totalconfirmed').text(totalconfirmed)
     d3.select('#totaldeath').text(totaldeath)
 
+    //click the play button
+    // console.log(playButton)
+    // playButton.click()
 
+    $('#play-button').click()
 })
 
 

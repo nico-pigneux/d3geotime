@@ -1,21 +1,21 @@
-function hbar(defData, chartboxid, chartbox){
+function hbar(defData, chartboxid, chartbox) {
 
     // remove the previously built box (when playing, this prevents creating many many div boxes...)
     chartbox.select('div.tau-chart__layout').remove();
 
     //https://api.taucharts.com/basic/guide.html
     var chart = new Taucharts.Chart({
-    
+
         type: 'horizontal-stacked-bar',
         y: 'place',
         x: 'count',
         color: 'datacat',
-        label:'count',
+        label: 'count',
         // size: 'ABS(count)',
         plugins: [
             Taucharts.api.plugins.get('tooltip')(),
             // Taucharts.api.plugins.get('legend')(), // this disables categories (places) on y axis
-         ],
+        ],
         data: defData
         // .map(function (row) {
         //     row['ABS(count)'] = Math.abs(100);
@@ -23,31 +23,31 @@ function hbar(defData, chartboxid, chartbox){
         // })
         //.reverse()
         ,
-        settings:{
+        settings: {
             // https://api.taucharts.com/basic/settings.html#animationspeed
             // yDensityPadding:100,
             // xDensityPadding:100,
             asyncRendering: true,
-            animationSpeed:0,
+            animationSpeed: 0,
             fitModel: 'normal' //minimal / entire-view / fit-width / fit-height / normal
             // // fit-width (all as 100% in length) 
         },
         guilde: {
             showGridLines: 'x', // show vertical grid line
-            x: { 
+            x: {
                 // nice: false,
-                padding:0,
+                padding: 0,
                 // label:{text:''} //https://api.taucharts.com/basic/guide.html
                 // label:'placex' 
             },
-            xDensityPadding:1,
-            yDensityPadding:1,
-            y: { 
+            xDensityPadding: 1,
+            yDensityPadding: 1,
+            y: {
                 // nice: false,
-                padding:0,
+                padding: 0,
                 // label:{text:''}
                 // label:'placey'
-             },
+            },
 
             // size: 100,
             // color: {
@@ -60,105 +60,105 @@ function hbar(defData, chartboxid, chartbox){
             // padding: {b:0, l:0, t:0, r:0}
         }
     });
-    chart.renderTo('#'+chartboxid);
+    chart.renderTo('#' + chartboxid);
     // d3.selectAll('text.i-role-label').style('font-size', '20px')
     // .attr("text-anchor", "right")
     d3.selectAll('text.label.label.inline').text('')
     d3.selectAll('tspan.label-token.label-token-0').text('')
-    d3.selectAll('rect.i-role-element.i-role-datum.bar.tau-chart__bar.color20-1').style('fill','red')
+    d3.selectAll('rect.i-role-element.i-role-datum.bar.tau-chart__bar.color20-1').style('fill', 'red')
     d3.selectAll('rect.i-role-element.i-role-datum.bar.tau-chart__bar.color20-2')
-        .styles({'fill':'black','margin-left':'30px', 'padding-left':'30px'})
-    d3.selectAll('text.i-role-label').styles({'fill':'white', 'font-weight':'bold'})
-    .text(d=>{
-        if (d.datacat==="confirmed"){
-            return d.count
+        .styles({ 'fill': 'black', 'margin-left': '30px', 'padding-left': '30px' })
+    d3.selectAll('text.i-role-label').styles({ 'fill': 'white', 'font-weight': 'bold' })
+        .text(d => {
+            if (d.datacat === "confirmed") {
+                return d.count
+            } else {
+                return '//' + d.count
+            }
+        })
+
+
+
+
+}// end hbar()
+
+
+
+
+function getRecent(dataArray) {
+    // from the data array, and for each place, get the latest data
+
+    // get distinct places (by province name), and use the place names as indices to 
+    // get data of the most recent reporting time (in d.time)
+    var places = [];
+    var Recent1 = {};
+    dataArray.forEach(d => {
+        // console.log(d.data)
+        var theplace = d.data[6]
+        // for new places, add the data into the array Recent1
+        if (!places.includes(theplace)) {
+            places.push(theplace)
+            Recent1[theplace] = d
+            // for existing place, update the data into the data piece of the corresponding place, if the data time (d.time) is newer
         } else {
-            return '//'+ d.count 
+            if (d.time > Recent1[theplace].time) {
+                Recent1[theplace] = d
+            }
         }
     })
+    // console.log(Recent1)
 
-    
-      
-
-    }// end hbar()
-
-
-
-
-function getRecent(dataArray){
-        // from the data array, and for each place, get the latest data
-
-        // get distinct places (by province name), and use the place names as indices to 
-            // get data of the most recent reporting time (in d.time)
-        var places=[];
-        var Recent1={};
-        dataArray.forEach(d=>{
-            // console.log(d.data)
-            var theplace=d.data[6]
-            // for new places, add the data into the array Recent1
-            if (! places.includes(theplace)){
-                places.push(theplace)
-                Recent1[theplace] = d
-            // for existing place, update the data into the data piece of the corresponding place, if the data time (d.time) is newer
-            } else {
-                if (d.time > Recent1[theplace].time ) {
-                    Recent1[theplace] = d
-                }
-            }
-        })
-        // console.log(Recent1)
-
-        // there could be that the same place appears for multiple time (e.g., in Australia, NSW and Sydney
-        // were both reported, actually referring to the same place, with the same gps coordinates )
-        // the following is to check and remove the duplicated data pieces of the same gps coordinate.
-        // here the gps coordinates (arrays like [33.xxx, 156.xxxx]) are used as indices
-        var gps=[];
-        var Recent2={};
-        places.forEach(d=>{
-            // console.log(d.data)
-            var thegps=Recent1[d].LatLng;
-            // for the new gps coordinates, push the data into Recent2
-            if (! gps.includes(thegps)){
-                gps.push(thegps)
-                Recent2[thegps] = Recent1[d]
+    // there could be that the same place appears for multiple time (e.g., in Australia, NSW and Sydney
+    // were both reported, actually referring to the same place, with the same gps coordinates )
+    // the following is to check and remove the duplicated data pieces of the same gps coordinate.
+    // here the gps coordinates (arrays like [33.xxx, 156.xxxx]) are used as indices
+    var gps = [];
+    var Recent2 = {};
+    places.forEach(d => {
+        // console.log(d.data)
+        var thegps = Recent1[d].LatLng;
+        // for the new gps coordinates, push the data into Recent2
+        if (!gps.includes(thegps)) {
+            gps.push(thegps)
+            Recent2[thegps] = Recent1[d]
             // for existing gps coordinates, update the corrsponding data piece if the d.time is newer
-            } else {
-                if ( Recent1[d].time > Recent2[thegps].time ) {
-                    Recent2[thegps] = Recent1[d]
-                }
+        } else {
+            if (Recent1[d].time > Recent2[thegps].time) {
+                Recent2[thegps] = Recent1[d]
             }
-        })
-        // console.log(Recent2)
+        }
+    })
+    // console.log(Recent2)
 
-        // after the above step, places like NSW and Sydney are still in Recent2. 
-        // None is deleted, but the data piece is the same
-        // the following is to remove data if having repeated contents 
-        var recent=[]
-        // console.log(Recent2)
-        gps.forEach(d=>{
-            if (! recent.includes(Recent2[d])){
-                recent.push(Recent2[d])
-            }        
-        })
-        // console.log(recent)
-        return recent
+    // after the above step, places like NSW and Sydney are still in Recent2. 
+    // None is deleted, but the data piece is the same
+    // the following is to remove data if having repeated contents 
+    var recent = []
+    // console.log(Recent2)
+    gps.forEach(d => {
+        if (!recent.includes(Recent2[d])) {
+            recent.push(Recent2[d])
+        }
+    })
+    // console.log(recent)
+    return recent
 }
 
 // determine the cat of confirmed cases
-function cat_r (ncases, cutoff, rcatsv ) {
+function cat_r(ncases, cutoff, rcatsv) {
     var r
-    if (ncases===0){ r= 0 }
+    if (ncases === 0) { r = 0 }
     else if (ncases < cutoff[0]) {
         r = rcatsv[0]
     }
     else {
-        var i= 1
-        r=rcatsv[rcatsv.length-1]
-        cutoff.forEach(d=>{
-            if (ncases >= cutoff[i-1] && ncases < cutoff[i]) { 
+        var i = 1
+        r = rcatsv[rcatsv.length - 1]
+        cutoff.forEach(d => {
+            if (ncases >= cutoff[i - 1] && ncases < cutoff[i]) {
                 r = rcatsv[i]
-             }
-            i=i+1
+            }
+            i = i + 1
         })
     }
     // console.log(ncases)
@@ -171,7 +171,7 @@ function cat_r2(ncases) {
     if (ncases > 200) { r = 30 }
     else if (ncases > 50) { r = 15 }
     else if (ncases > 10) { r = 10 }
-    else if (ncases > 0) { r = 5}
+    else if (ncases > 0) { r = 5 }
     else { r = 0 }
     // console.log(r)
     return r;
@@ -1305,6 +1305,71 @@ function getrealdata() {
 ["Zabaikalsky ","Russia","2020-01-31 19:00:00","1","0","0","0","53.0929","116.9677"],
 ["Madrid","Spain","2020-01-31 19:00:00","1","0","0","0","40.4168","-3.7038"],
 ["Oxfordshire","UK","2020-01-31 19:00:00","2","0","0","0","51.7612","-1.2465"],
+["Tyumen","Russia","2020-01-31 19:00:00","1","0","0","0","57.1613","65.5250"],
+["Hubei","Mainland China","2020-02-01 10:00:00","7153","0","168","249","30.5928","114.3055"],
+["Zhejiang","Mainland China","2020-02-01 10:00:00","599","0","21","0","30.2741","120.1551"],
+["Guangdong","Mainland China","2020-02-01 10:00:00","535","0","14","0","23.1291","113.2644"],
+["Henan","Mainland China","2020-02-01 10:00:00","422","0","3","2","34.7466","113.6253"],
+["Hunan","Mainland China","2020-02-01 10:00:00","389","0","8","0","28.2282","112.9388"],
+["Anhui","Mainland China","2020-02-01 10:00:00","297","0","5","0","31.8206","117.2272"],
+["Jiangxi","Mainland China","2020-02-01 10:00:00","286","0","9","0","28.6829","115.8582"],
+["Chongqing","Mainland China","2020-02-01 10:00:00","247","0","3","1","29.4316","106.9123"],
+["Sichuan","Mainland China","2020-02-01 10:00:00","207","0","3","1","30.5728","104.0668"],
+["Shandong","Mainland China","2020-02-01 10:00:00","206","0","3","0","36.6512","117.1201"],
+["Jiangsu","Mainland China","2020-02-01 10:00:00","202","0","6","0","32.0603","118.7969"],
+["Shanghai","Mainland China","2020-02-01 10:00:00","169","0","10","1","31.2304","121.4737"],
+["Beijing","Mainland China","2020-02-01 10:00:00","168","0","9","1","39.9042","116.4074"],
+["Fujian","Mainland China","2020-02-01 10:00:00","144","0","0","0","26.0745","119.2965"],
+["Shaanxi","Mainland China","2020-02-01 10:00:00","101","0","0","0","34.3416","108.9398"],
+["Guangxi","Mainland China","2020-02-01 10:00:00","100","0","2","0","22.8170","108.3665"],
+["Hebei","Mainland China","2020-02-01 10:00:00","96","0","0","1","38.0428","114.5149"],
+["Yunnan","Mainland China","2020-02-01 10:00:00","91","0","2","0","24.8801","102.8329"],
+["Heilongjiang","Mainland China","2020-02-01 10:00:00","80","0","2","2","45.8038","126.5350"],
+["Liaoning","Mainland China","2020-02-01 10:00:00","63","0","1","0","41.8057","123.4315"],
+["Hainan","Mainland China","2020-02-01 10:00:00","62","0","1","1","20.0444","110.1983"],
+["Shanxi","Mainland China","2020-02-01 10:00:00","47","0","1","0","37.8706","112.5489"],
+["Tianjin","Mainland China","2020-02-01 10:00:00","38","0","0","0","39.3434","117.3616"],
+["Gansu","Mainland China","2020-02-01 10:00:00","35","0","0","0","36.0611","103.8343"],
+["Guizhou","Mainland China","2020-02-01 10:00:00","29","0","2","0","26.6477","106.6302"],
+["Ningxia","Mainland China","2020-02-01 10:00:00","26","0","0","0","38.4872","106.2309"],
+["Inner Mongolia","Mainland China","2020-02-01 10:00:00","23","0","1","0","40.8424","111.7500"],
+["Xinjiang","Mainland China","2020-02-01 10:00:00","18","0","0","0","43.8256","87.6168"],
+["Jilin","Mainland China","2020-02-01 10:00:00","17","0","1","0","43.8171","125.3235"],
+["Hong Kong","Hong Kong","2020-02-01 10:00:00","13","0","0","0","22.3193","114.1694"],
+["Taiwan","Taiwan","2020-02-01 10:00:00","10","0","0","0","25.0330","121.5654"],
+["Qinghai","Mainland China","2020-02-01 10:00:00","9","0","0","0","36.6171","101.7782"],
+["Macau","Macau","2020-02-01 10:00:00","7","0","0","0","22.1987","113.5439"],
+["Tibet","Mainland China","2020-02-01 10:00:00","1","0","0","0","29.6548","91.1406"],
+["Washington","US","2020-02-01 10:00:00","1","0","0","0","47.7511","-120.7400"],
+["Illinois","US","2020-02-01 10:00:00","2","0","0","0","40.6331","-89.3985"],
+["California","US","2020-02-01 10:00:00","3","0","0","0","36.7783","-119.4170"],
+["Arizona","US","2020-02-01 10:00:00","1","0","0","0","34.0489","-111.0937"],
+["Tokyo","Japan","2020-02-01 10:00:00","17","0","1","0","35.6762","139.6503"],
+["Bankok","Thailand","2020-02-01 10:00:00","19","0","7","0","13.7563","100.5018"],
+["Seoul","South Korea","2020-02-01 10:00:00","12","0","0","0","37.5665","126.9780"],
+["Singapore","Singapore","2020-02-01 10:00:00","18","0","0","0","1.3521","103.8198"],
+["Hanoi","Vietnam","2020-02-01 10:00:00","6","0","1","0","21.0278","105.8342"],
+["Paris","France","2020-02-01 10:00:00","6","0","0","0","48.8566","2.3522"],
+["Kathmandu","Nepal","2020-02-01 10:00:00","1","0","0","0","27.7172","85.3240"],
+["Kuala Lumpur","Malaysia","2020-02-01 10:00:00","8","0","0","0","3.1390","101.6869"],
+["Ontario","Canada","2020-02-01 10:00:00","3","0","0","0","43.6532","-79.3832"],
+["British Columbia","Canada","2020-02-01 10:00:00","1","0","0","0","49.2827","-123.1207"],
+["Phnom Penh","Cambodia","2020-02-01 10:00:00","1","0","0","0","11.5564","104.9282"],
+["Colombo","Sri Lanka","2020-02-01 10:00:00","1","0","1","0","6.9271","79.8612"],
+["New South Wales","Australia","2020-02-01 10:00:00","4","0","2","0","-33.8688","151.2093"],
+["Victoria","Australia","2020-02-01 10:00:00","4","0","0","0","-37.8136","144.9631"],
+["Queensland","Australia","2020-02-01 10:00:00","3","0","0","0","27.4698","153.0251"],
+["South Australia","Australia","2020-02-01 10:00:00","1","0","0","0","-34.9285","138.6007"],
+["Bavaria","Germany","2020-02-01 10:00:00","7","0","0","0","48.1351","11.5820"],
+["Helsinki","Finland","2020-02-01 10:00:00","1","0","0","0","60.1699","24.9384"],
+["Abu Dhabi","United Arab Emirates","2020-02-01 10:00:00","4","0","0","0","24.4539","54.3773"],
+["Manila","Philippines","2020-02-01 10:00:00","1","0","0","0","14.5995","120.9842"],
+["New Delhi","India","2020-02-01 10:00:00","1","0","0","0","28.6139","77.2090"],
+["Rome","Italy","2020-02-01 10:00:00","2","0","0","0","41.9028","12.4964"],
+["Jönköping","Sweden","2020-02-01 10:00:00","1","0","0","0","57.7826","14.1618"],
+["Zabaikalsky ","Russia","2020-02-01 10:00:00","1","0","0","0","53.0929","116.9677"],
+["Madrid","Spain","2020-02-01 10:00:00","1","0","0","0","40.4168","-3.7038"],
+["Oxfordshire","UK","2020-02-01 10:00:00","2","0","0","0","51.7612","-1.2465"],
 ["Tyumen","Russia","2020-01-31 19:00:00","1","0","0","0","57.1613","65.5250"]
 
     ];
@@ -1320,3 +1385,276 @@ function getrealdata() {
     // console.log(realdata)
     return realdata;
 }// end getrealdata
+
+
+
+
+// get the link of SARS reports from the website of WHO 
+function getwhosarsdatalinks() {
+
+    var url = "https://www.who.int/csr/sars/country/en/";
+    //https://api.jquery.com/jquery.get/
+
+
+
+    var getlinks = d3.html(url, d => {
+
+        // console.log(d)
+
+        // turn the dom (d) into a d3 object
+        var thedomobj = d3.select(d)
+        // console.log(thedomobj)
+
+        // var thedombody = thedomobj.select('body') // not work
+        //  console.log(thedombody)
+
+        // the first ul contains the target li elements
+        var theul = thedomobj.select('ul.auto_archive')
+        // console.log(theul)
+
+        // the first ul contains the target li elements
+        var theli_d3objs = theul.selectAll('li')
+        // console.log(theli_d3objs)
+        var thelidoms = theli_d3objs.nodes()
+        // console.log(thelidoms)
+
+        var thelinks = []
+        var thelinks_csvstr = "id" + ", " + "\"datestr\"" + "," + "\"url\"" + "\n";
+        var i = 1
+        thelidoms.forEach(e => {
+            var thelink = d3.select(e).select('a')
+            // console.log(thelink)
+            // console.log(thelink.text())
+            // console.log(thelink.attr("href"))
+
+            // ***optiuon1. push reuslts by property
+            function option1() {
+                var tmp0 = {};
+                tmp0.datestr = thelink.text()
+                tmp0.link = "https://www.who.int" + thelink.attr("href")
+                // run getdailydata and push the result data into the filed tmp0.data
+                // getdailydata(tmp0.link)
+                thelinks.push(tmp0)
+            }
+            //** option2: save as a csv format */
+            var thelinkstr = "https://www.who.int" + thelink.attr("href");
+            function option2(i) {
+                var thecsvrowstr = i   // id of the link
+                    + ", " + "\"" + thelink.text() + "\""  // the report date in string
+                    + ", " + "\"" + thelinkstr + "\""
+                thelinks_csvstr = thelinks_csvstr + thecsvrowstr + "\n"
+                // fetch table data from the link
+            }
+
+            option2(i)
+            if (i > -1) { // the if here is to control whether run for all days or a particular day or a few
+                //run the function to get daily data and save as csv files at data/sars
+                getdailydata(thelinkstr, i)
+            }
+
+            i = i + 1
+        }) // end loop for each link
+
+        // console.log(thelinks_csvstr)
+
+        // post the str to php, and save on the server
+        var targetphp = 'php/phptotxt.php',
+            srcfilestr = thelinks_csvstr, // the str in csv format
+            targetfilename = 'reports.csv' // the name of the csv
+
+        // save the list of report files as a csv at data/sars
+        saveToserverbyPHP(srcfilestr, targetfilename, targetphp)
+
+        //
+
+    }) // end d3.html
+
+} // end function getwhosarsdatalinks()
+
+
+/* 
+ Getting data 
+
+ 1. colnames in  tbody.thead, or in tbody.tr1  ==> check the collection of doms '<thead>'
+        {if .length>0 : col names from thead cells; if 0: col names from the first row of tbody cells}
+ 2. data in tr.<p>, or in tr.<b> ===> get the .innerText
+
+ 3. different col numbers and names
+  
+*/
+
+
+// var thelink1 = 'https://www.who.int/csr/sars/country/table/en/'
+// var thelink2 = 'https://www.who.int/csr/sars/country/2003_03_28/en/'
+// var thelink3 = 'https://www.who.int/csr/sars/country/2003_07_11/en/'
+
+/* 
+Principle on when to get as a d3 obj, when as an array of html doms
+1. To get all the children components, get the parent as a d3 obj. (e.g., pd3.selectAll('tr'))
+2. To loop for all children, get the childen as an array of htmlDOMs. (so as to use .forEach())
+*/
+function getdailydata(thelink, id) {
+    // console.log(thelink)
+    d3.html(thelink, d => {
+
+        // console.log(d)
+        var thedomobj = d3.select(d)
+
+        // init the colnames
+        var colnames = []
+        var targetset = []
+
+        // test if there is a dom 'thead'
+        var thetablehead = thedomobj.select('thead')
+        var theaddomelength = thetablehead.nodes().length
+
+        // if theaddomelength >0, get colnames from thead
+        if (theaddomelength > 0) {
+
+            //get a collection of tds of the first row of the thead
+            var theadcelldoms = thedomobj.select('thead').select('tr').selectAll('td').nodes()
+            // console.log(theadcelldoms)
+
+            theadcelldoms.forEach(d => {
+                colnames.push(d.innerText)
+            })
+            // console.log(colnames)
+        }
+
+
+        // get the table dom as a d3 obj
+        var thetablebody = thedomobj.select('tbody')
+        // console.log(thetablebody)
+
+        // // get the rows
+        var therowdoms = thetablebody.selectAll('tr').nodes()
+        // console.log(therowdoms)
+
+        //loop for each row
+        var i = 0; // count the number of rows
+        therowdoms.forEach(r => {
+            // console.log(r)
+            var thetrs_d3 = d3.select(r)
+            // console.log(thetrs_d3)
+
+            //get the cell doms        
+            var thecelldoms = thetrs_d3.selectAll('td').nodes()
+            // console.log(thecelldoms)
+
+            // if column names have not be defined (not in <thead>), and it is the first row
+            // save the contents as the colnames
+
+            if (i === 0 && colnames.length === 0) {
+                thecelldoms.forEach(c => {
+                    // console.log(c)
+                    colnames.push(c.innerText)
+                })
+            } else { // if the colname have been defined, save the data into a tmp obj, and push it into the final data array
+                var tmp = {}, j = 0;
+                thecelldoms.forEach(c => {
+                    // save data into the target field, like tmp['country'] = 'Vietnam'
+                    tmp[colnames[j]] = c.innerText
+                    j = j + 1
+                })
+                // after the loop of all cells (in a row) is done, push the tmp into the target set
+                //
+                targetset.push(tmp)
+            }
+
+            // loop for each cell, push values into an array
+            thecelldoms.forEach(c => {
+                // console.log(c)
+                // console.log(c.innerText)
+            })
+
+            i = i + 1; // accrual of row numbers
+
+        }) // end of loop for rows
+
+        // console.log(targetset)
+        //save the targetset as data of the tmp0 from the parent function
+
+        // the target data set is in a sort of obj with propoerties 
+        //(e.g., [{countr:'..', cases:'..'},{countr:'..', cases:'..'}...)
+
+        //change the targetset into a csv str
+        var thedailydatastr = '';
+        // append the column names as the first row
+        var i = 0;
+        var rowstr = '';
+        colnames.forEach(d => {
+            if (i === 0) {
+                rowstr = "\"" + d + "\"";
+            } else {
+                rowstr = rowstr + "," + "\"" + d + "\"";
+            }
+            i = i + 1;
+        })
+        thedailydatastr = thedailydatastr + rowstr + "\n";
+
+        targetset.forEach(d => {
+
+            var rowstr = '';
+            var i = 0;
+            // loop for each property (value of column names)
+            colnames.forEach(e => {
+                if (i === 0) {
+                    rowstr = "\"" + d[e] + "\"";
+                } else {
+                    rowstr = rowstr + "," + "\"" + d[e] + "\"";
+                }
+                i = i + 1;
+            })
+            // append the whole row str to thedailydatastr with a "\n"'
+            thedailydatastr = thedailydatastr + rowstr + '\n'
+
+        })
+
+        // console.log(thedailydatastr)
+        // post the data to php, and save on the server as a csv file
+        var targetphp = 'php/phptotxt.php',
+            srcfilestr = thedailydatastr, // the str in csv format
+            targetfilename = id + '.csv' // the name of the csv
+
+        // save the list of report files as a csv at data/sars
+        saveToserverbyPHP(srcfilestr, targetfilename, targetphp)
+
+    }); // end of d3.htmnl() 
+
+}// end function getdailydata()
+
+
+//Run the following the get the link and save the SARS daily data.
+// getwhosarsdatalinks();
+
+
+
+
+
+// to post data to the php file
+function saveToserverbyPHP(srcfilestr, targetfilename, targetphp) {
+
+    var
+        v1 = srcfilestr,
+        v2 = targetfilename;
+    tosend = {
+        thesrcstr: v1,
+        targetfilename: v2
+    }
+
+    // Post the json data to a php file, and receive response text echoed on that php file
+    //https://api.jquery.com/jQuery.post/
+    // The jquery way is simply to specify: 1) the target php, 2) the name of the json data 3) the data type.
+
+    var jqxhr = $.post(
+        targetphp,
+        tosend,
+        'json'
+    )
+        // the following is to return the contents printed on the target php, so that user can 
+        // moniter whether the target php runs normally or having errors.
+        .done(function (d) {
+            console.log('On targetphp:\n' + d);
+        }) // end post
+
+}
