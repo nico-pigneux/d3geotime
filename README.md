@@ -13,6 +13,11 @@ d3 timeline and play button
 http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8
 https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763
 
+branch v9
+add functions to download SARS data from WHO
+
+branch v8
+adding stacked bars using Tauchart.
 
 branch v7
 rearranged legends
