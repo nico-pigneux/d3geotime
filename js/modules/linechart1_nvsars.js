@@ -1,8 +1,16 @@
 
-
-/*
+/* To have a line chart comparing the progress of 2019NV cases with that of 2013 SARS cases
 [{time: , confirmed:, death: recovered: }
 ]
+
+read SARS 
+report dates
+===========================> read individual SARS 
+                                reort and get data
+                            ==========================> merge with 2019 NV data
+                                                        ==========================> make line chart
+
+
 */
 var sars=[]
 // get the dates
@@ -55,13 +63,14 @@ d3.csv('data/sars/reports.csv', d => {
 
 
 
-
+//get data from individual csv files
 function getSARSData(id, sarsreportdates) {
     d3.csv('data/sars/' + id + '.csv', d => {
         // console.log(d)
+        
         var keys = Object.keys(d)
+        
         // get the last key, which is the column names
-
         var indexOfcolnames = keys[keys.length - 1]
         var colnames = d[indexOfcolnames]
 
@@ -94,14 +103,14 @@ function getSARSData(id, sarsreportdates) {
 
                     // layer 3
                     // get nv data and make chart
-                    var nvdata = getnvdata(sars)
+                   mergenvsars(sars)
                 } 
             }
         })
     })
 }
 
-function getnvdata(sarsdata) {
+function mergenvsars(sarsdata) {
     // get nv data
     var data = getrealdata().objects;
     // console.log(data)
