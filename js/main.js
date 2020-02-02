@@ -1,8 +1,30 @@
 // read data from a json file
-d3.json("data/notused.json", function (collection) {
+d3.text("data/nvdata.csv", function (text) {
 
+    // the csv file doesnot have header, so import as text, and use csvParseRows to convert to an obj
+    // https://stackoverflow.com/questions/13870265/read-csv-tsv-with-no-header-line-in-d3
+    rawdata = d3.csvParseRows(text)
+    // console.log(rawdata)
+
+    // for some reason, when I started project, the columns were arranged in the following order.
+    // now I have to follow such order...
+    var collection={}
+    collection['objects'] = [];
+    rawdata.forEach(d => {
+        var tmp = {};
+        tmp['data'] = [parseFloat(d[7]), parseFloat(d[8]), parseInt(d[3]), parseInt(d[4]),
+        parseInt(d[5]), parseInt(d[6]), d[0], d[1], d[2]];
+
+        // do not push the empty/null rows
+        if (d[7] !== undefined && d[8] !== undefined) {
+            collection['objects'].push(tmp);
+        }        
+    })
+    console.log(collection)
+
+    // starting from this version, switch to loading .csv insead of runing the following getrealdata()
     //use the real data, instead of the novocorona.json (which is incomplete)
-    collection = getrealdata();
+    // collection = getrealdata();
     // console.log(collection)
 
     // save it to a global variable dataset
@@ -11,6 +33,7 @@ d3.json("data/notused.json", function (collection) {
     // The above steps leave it flexible to read from a json, or from a loaded json file directly
 
     dataset = collection.objects;
+    // console.log(dataset)
 
     /* Add a LatLng object to each item in the dataset */
     var i = 0;

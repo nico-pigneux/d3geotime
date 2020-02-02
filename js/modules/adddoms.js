@@ -317,8 +317,8 @@ thetotalnumbox.append('span').attrs({"id":"totaldeath"})
 // links to download of data
 thetotalnumbox
     .append("xhtml:a")
-    .attr("href", "./data/cases.csv")
-    .html("<br /><br /><br />download cases.csv<br /><br />")
+    .attr("href", "./data/nvdata.csv")
+    .html("<br /><br /><br />download nvdata.csv<br /><br />")
     .append('xhtml:a')
     .attrs({
         "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",

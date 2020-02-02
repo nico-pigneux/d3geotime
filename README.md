@@ -15,6 +15,10 @@ https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763
 
 V11
 
+bug: 
+1. the getrecent is not correct (report time issue). to fix: only take the last report time (in a batch, use the same reporting time)
+2. The timeline bar is wrong, not showing the most recent data.
+
 Rearrange layout
 try to fix incomplete loading issue for csv files (not sure if the problem has been solved)
 

@@ -85,7 +85,7 @@ function hbar(defData, chartboxid, chartbox) {
 
 
 
-function getRecent(dataArray) {
+function getRecent_bk(dataArray) {
     // from the data array, and for each place, get the latest data
 
     // get distinct places (by province name), and use the place names as indices to 
