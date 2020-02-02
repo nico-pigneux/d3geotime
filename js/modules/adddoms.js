@@ -16,7 +16,7 @@ var titlebox = morebox.append('div')
     "border-style": "none",
     "margin-left": "50px",
     "width":"1500px",
-    "height":"80px",
+    "height":"40px",
     "vertical-align":"top",
     "positoin":"absolute",
     "z-index": "1"
@@ -86,7 +86,7 @@ var foot_lchart1box = chartbox2.append('div')
     // "border-width":"1px",
 })
 .append('h3')
-.html("Number of confirmed cases over time (Blue: 2019-nCoV; Red: 2013-SARS).  <span> as of " + Date() + "</span>")
+.html("Number of confirmed cases over time (Red: 2019-nCoV; Grey: 2003-SARS).  <span> as of " + Date() + "</span>")
 .styles({
     "color":"grey",
     "font-weight":"normal"
@@ -102,7 +102,7 @@ var lchart1a = lchart1.append('div')
     "border-style": "none",
     "border-color":"lightblue",
     "width":"1500px",
-    "height":'250px',
+    "height":'400px',
     // "resize": "both",
     // "overflow": "auto",
     "border-width":"1px"
@@ -318,7 +318,7 @@ thetotalnumbox.append('span').attrs({"id":"totaldeath"})
 thetotalnumbox
     .append("xhtml:a")
     .attr("href", "./data/cases.csv")
-    .html("<br /><br /><br />download cases.csv<br />")
+    .html("<br /><br /><br />download cases.csv<br /><br />")
     .append('xhtml:a')
     .attrs({
         "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",

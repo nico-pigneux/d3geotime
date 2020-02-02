@@ -200,7 +200,7 @@ function lchart(thedata, chartboxid, chartbox) {
 
     new Taucharts.Chart({
         data: thedata, //data(),
-        type: 'line',
+        type: 'area',
         x: 'time',//'longitude', //'time4',
         y: 'count', //'latitude', //'count',
         color: 'group',
@@ -219,14 +219,14 @@ function lchart(thedata, chartboxid, chartbox) {
             //     minSize: 1,
             //     maxSize: 12
             // }
-            // ,
-            // color: {
-            //     brewer: {
-            //         'nv': 'rgba(0,0,0,0)', // use transparent color for workaround
-            //         'nv2': '#FF0000',
-            //         'nv': '#000000'
-            //     }
-            // }
+            ,
+            color: {
+                brewer: {
+                   // 'nv': 'rgba(0,0,0,0)', // use transparent color for workaround
+                    'nv': 'rgba(255,0,0, 1)',//#FF0000,
+                    'sars': 'rgba(110,110,110, 0.5)'
+                }
+            }
         },
         plugins: [
             // tauCharts.api.plugins.get('legend')(),
