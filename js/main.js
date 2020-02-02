@@ -20,7 +20,7 @@ d3.text("data/nvdata.csv", function (text) {
             collection['objects'].push(tmp);
         }        
     })
-    console.log(collection)
+    // console.log(collection)
 
     // starting from this version, switch to loading .csv insead of runing the following getrealdata()
     //use the real data, instead of the novocorona.json (which is incomplete)
