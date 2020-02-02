@@ -1,31 +1,116 @@
 // document.getElementById("currenttimestamp").innerHTML = Date()
 
 //title
-var thebody = d3.select('body');
-thebody.append('h1')
+var thebody = d3.select('body')
+var morebox = thebody.append('div')
+.styles({"positon":"relative"})
+
+
+// add a title box
+var titlebox = morebox.append('div')
+.attrs({ 
+    "class": "titlebox",
+    "id":"titlebox"
+})
+.styles({
+    "border-style": "none",
+    "margin-left": "50px",
+    "width":"1500px",
+    "height":"80px",
+    "vertical-align":"top",
+    "positoin":"absolute",
+    "z-index": "1"
+})
     .styles({
-        "text-align": "center"
+        "text-align": "right",
+        "vertical-align":"top"
     })
-    .text("Cases of choronavirus (2019-nCoV) infection in the world")
-    .append('span')
+    .text("New Coronavirus Outbreak Dwarfs SARS")
     .attrs({ "id": "currenttimestamp" })
     .styles({
-        "font-size": "12px",
-        "font-weight": "normal"
+        "font-family":"Bebas Neue",
+        "font-size":"100px", 
+        'font-weight': 'bold'
     })
-    .html('<br />   as of ' + Date())
 
-// subtitle: github link
-thebody.append('h3')
-    .styles({
-        "text-align": "center"
-    })
-    .append('a')
-    .attrs({
-        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
-        "target": '_blank'
-    })
-    .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
+// // subtitle: github link
+// titlebox.append('h3')
+//     .styles({
+//         "text-align": "center"
+//     })
+//     .append('a')
+//     .attrs({
+//         "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
+//         "target": '_blank'
+//     })
+//     .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
+
+
+//var add a box to display the NV-SARS comparison chart
+var chartbox2 = morebox.append('div')
+.attrs({ 
+    "class": "chartbox",
+    "id":"charts2"
+})
+.styles({
+    "border-style": "none",
+    "margin-left": "50px",
+    "width":"2000px",
+    "position":"relative",
+    "z-index":"2"
+    // "height":"1500px"
+})
+;
+var lchart1 = chartbox2.append('div')
+.attrs({ 
+    "class": "bytimeholder",
+})
+.styles({
+    // "border-style": "solid",
+    "width":"1500px",
+    // "resize": "both",
+    // "overflow": "auto",
+    // "border-width":"1px",
+})
+
+var foot_lchart1box = chartbox2.append('div')
+.attrs({ 
+    "class": "footnotebox1",
+})
+.styles({
+    // "border-style": "solid",
+    "width":"1500px",
+    "text-align":"left"
+    // "resize": "both",
+    // "overflow": "auto",
+    // "border-width":"1px",
+})
+.append('h3')
+.html("Number of confirmed cases over time (Blue: 2019-nCoV; Red: 2013-SARS).  <span> as of " + Date() + "</span>")
+.styles({
+    "color":"grey",
+    "font-weight":"normal"
+})
+
+// the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
+var lchart1a = lchart1.append('div')
+.attrs({ 
+    "class": "linechart",
+    "id":"linetotal"
+})
+.styles({
+    "border-style": "none",
+    "border-color":"lightblue",
+    "width":"1500px",
+    "height":'250px',
+    // "resize": "both",
+    // "overflow": "auto",
+    "border-width":"1px"
+})
+;
+
+
+
 
 // a big box to hold everthing
 var thebigbox = thebody.append('div')
@@ -175,7 +260,7 @@ legendsvg.selectAll('g.legendrectg').nodes().forEach(d=>{
 
 //the total number box
 var thetotalnumbox = thebigbox.append('div')
-    .attrs({ "class": "youtubebox" })
+    .attrs({ "class": "totalnumbox" })
     .styles({
         "margin-left": "100px",
         "display": "inline-block",
@@ -185,7 +270,7 @@ var thetotalnumbox = thebigbox.append('div')
     });
 
 //title of the video
-thetotalnumbox.append('span').html('number of confirmed cases<br />')
+thetotalnumbox.append('span').html('number of confirmed 2019-nCoV cases<br />')
     .styles({
         // "font-family":"Source Sans Pro",
         "font-weight":"400",
@@ -233,7 +318,13 @@ thetotalnumbox.append('span').attrs({"id":"totaldeath"})
 thetotalnumbox
     .append("xhtml:a")
     .attr("href", "./data/cases.csv")
-    .html("<br /><br /><br />download cases.csv")
+    .html("<br /><br /><br />download cases.csv<br />")
+    .append('xhtml:a')
+    .attrs({
+        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
+        "target": '_blank'
+    })
+    .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
     ;
 
 // insert a box for charts
@@ -251,35 +342,6 @@ var chartbox = thebody.append('div')
 ;
 
 
-var lchart1 = chartbox.append('div')
-.attrs({ 
-    "class": "bytimeholder",
-})
-.styles({
-    // "border-style": "solid",
-    "width":"1000px",
-    // "resize": "both",
-    // "overflow": "auto",
-    // "border-width":"1px",
-})
-.html("<h2>Number of confirmed cases over time (Blue: 2019-nCoV; Red: 2013-SARS)</h2>")
-;
-// the idea is to delete the box each time so that Tauchart won't creaet the same div again and again...
-var lchart1a = lchart1.append('div')
-.attrs({ 
-    "class": "linechart",
-    "id":"linetotal"
-})
-.styles({
-    "border-style": "solid",
-    "border-color":"lightblue",
-    "width":"1000px",
-    "height":'300px',
-    // "resize": "both",
-    // "overflow": "auto",
-    "border-width":"1px"
-})
-;
 
 
 
@@ -385,6 +447,12 @@ thefootnotebox.append("p")
 .html(`
         <strong>Copyright (c) 2020 Shenzhen YAO</strong> 
 `)
+    .append('a')
+    .attrs({
+        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
+        "target": '_blank'
+    })
+    .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
 
 thefootnotebox.append("p")
 .html(`
