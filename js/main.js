@@ -74,6 +74,8 @@ d3.text("data/nvdata.csv", function (text) {
 
     // add a label for the SARS graphic
     AddSARSlabel()
+    var nvfigs=[totalconfirmed, totaldeath]
+    AddNVlabel(nvfigs)   
 
     $('#play-button').click()
 })

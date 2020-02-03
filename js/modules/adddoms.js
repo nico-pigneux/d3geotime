@@ -23,7 +23,8 @@ var titlebox = morebox.append('div')
 })
     .styles({
         "text-align": "center",
-        "vertical-align":"top"
+        "vertical-align":"top",
+        "opacity":"0.8"
     })
     .text("New Coronavirus Outbreak")
     .attrs({ "id": "currenttimestamp" })

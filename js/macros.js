@@ -413,8 +413,6 @@ function getdailydata(thelink, id) {
 
 
 
-
-
 // to post data to the php file
 function saveToserverbyPHP(srcfilestr, targetfilename, targetphp) {
 
@@ -474,6 +472,6 @@ function  AddSARSlabel () {
                 "opacity": "0.5"
             })
             .style('border-style', "none")
-            .html('<span style="font-size:40px;">SARS-2003:</span><br /><strong>8437/813</strong><span style="font-size:20px">(confrimed cases/deaths)</span>')
+            .html('<span style="font-size:40px;">SARS-2003</span><span style="font-size:20px">(confrimed cases/deaths):</span><br /><strong>8437/813</strong>')
     }, 3000)
 }
