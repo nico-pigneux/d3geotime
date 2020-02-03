@@ -61,6 +61,8 @@ d3.text("data/nvdata.csv", function (text) {
         totaldeath = totaldeath + d.data[5]
     })
 
+    makelinechart1()
+
     //post the total numbers
     // console.log(totalconfirmed)
     d3.select('#totalconfirmed').text(totalconfirmed)
