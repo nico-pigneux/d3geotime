@@ -72,6 +72,9 @@ d3.text("data/nvdata.csv", function (text) {
     // console.log(playButton)
     // playButton.click()
 
+    // add a label for the SARS graphic
+    AddSARSlabel()
+
     $('#play-button').click()
 })
 

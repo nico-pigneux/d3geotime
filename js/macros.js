@@ -440,5 +440,40 @@ function saveToserverbyPHP(srcfilestr, targetfilename, targetphp) {
         .done(function (d) {
             console.log('On targetphp:\n' + d);
         }) // end post
+}
 
+function  AddSARSlabel () {
+    // on the SARS chart area, add a div as label : "SARS 8437 cases/813 deaths"
+    setTimeout(d => {
+
+        // find g elements containing line graphics (there are 2, one for nv, one for SARS)
+        var linegraphs = d3.selectAll('g.tau-chart__area.area.i-role-path.tau-chart__line-opacity-2.frame').nodes()
+        // console.log(linegraphs)
+
+        // select the second g, which is for SARS
+        var sarschart = d3.select(linegraphs[1])
+        // console.log(sarschart)
+
+        //Within the second g, add a g for SARS label
+        var sarslabelg = sarschart.append('g')//.insert('g', ":first-child")
+            .attrs({
+                "class": "sarslabelg"
+            })
+            .attr("transform", "translate(950,180)") // push it to the center of the SARS graphic area
+
+        // add the label as a foreignObject: xhtml : div
+        var sarslabelbox = sarslabelg
+            .append('foreignObject').attr('width', '600').attr('height', '600')
+            .append('xhtml:div')
+            .style("width", "600px")
+            .style("height", "600px")
+            .styles({
+                "font-family": "Bebas Neue",
+                "font-size": "60px",
+                "color": "grey",
+                "opacity": "0.5"
+            })
+            .style('border-style', "none")
+            .html('<span style="font-size:40px;">SARS-2003:</span><br /><strong>8437/813</strong><span style="font-size:20px">(confrimed cases/deaths)</span>')
+    }, 3000)
 }

@@ -18,14 +18,14 @@ var titlebox = morebox.append('div')
     "width":"1500px",
     "height":"40px",
     "vertical-align":"top",
-    "positoin":"absolute",
-    "z-index": "1"
+    "positoin":"absolute"
+    //, "z-index": "1"
 })
     .styles({
-        "text-align": "right",
+        "text-align": "center",
         "vertical-align":"top"
     })
-    .text("New Coronavirus Outbreak Dwarfs SARS")
+    .text("New Coronavirus Outbreak")
     .attrs({ "id": "currenttimestamp" })
     .styles({
         "font-family":"Bebas Neue",
@@ -49,15 +49,16 @@ var titlebox = morebox.append('div')
 //var add a box to display the NV-SARS comparison chart
 var chartbox2 = morebox.append('div')
 .attrs({ 
-    "class": "chartbox",
+    "class": "chartbox2",
     "id":"charts2"
 })
 .styles({
     "border-style": "none",
     "margin-left": "50px",
     "width":"2000px",
-    "position":"relative",
-    "z-index":"2"
+    "position":"relative"
+    // ,
+    // "z-index":"2"
     // "height":"1500px"
 })
 ;
@@ -465,7 +466,7 @@ thefootnotebox.append("p")
             4. rest_777.txt (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/rest_777.txt )<br />
             5. d3.slider.css (http://bl.ocks.org/cmdoptesc/raw/fc0e318ce7992bed7ca8/d3.slider.css )<br />
             6. novel coronavirus case data from
-            https://docs.google.com/spreadsheets/d/1yZv9w9zRKwrGTaR-YzmAqMefw4wMlaXocejdxZaTs6w/htmlview?usp=sharing&sle=true<br />
+            https://docs.google.com/spreadsheets/d/1wQVypefm946ch4XDp37uZ-wartW4V7ILdg-qYiDXUHM/htmlview?usp=sharing&sle=true <br />
             7. https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763 <br />
         </p>
 `)
