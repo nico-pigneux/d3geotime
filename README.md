@@ -14,6 +14,7 @@ http://bl.ocks.org/cmdoptesc/fc0e318ce7992bed7ca8
 https://bl.ocks.org/officeofjane/47d2b0bfeecfcb41d2212d06d095c763
 
 V12
+add a number of visits counter from https://www.freevisitorcounters.com/en/home/stats/id/631404
 report date are cleaned, using my report date (for each batch of report, the date is the same)
 1. the get recent bug is corrected now 
 
