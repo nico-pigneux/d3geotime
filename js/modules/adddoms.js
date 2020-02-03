@@ -285,7 +285,7 @@ thetotalnumbox.append('span').attrs({"id":"totalconfirmed"})
         'font-weight': 'bold',
         'color':"red"
     })
-thetotalnumbox.append('span').html('<br />number of death<br />')
+thetotalnumbox.append('span').html('<br />number of deaths<br />')
 .styles({
     // "font-family":"Source Sans Pro",
     "font-weight":"400",
