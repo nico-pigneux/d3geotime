@@ -473,7 +473,7 @@ function  AddSARSlabel () {
             })
             .style('border-style', "none")
             .html('<span style="font-size:40px;">SARS-2003</span><span style="font-size:20px">(confrimed cases/deaths):</span><br /><strong>8437/813</strong>')
-    }, 3000)
+    }, 6000)
 }
 
 
@@ -512,5 +512,5 @@ function  AddNVlabel (thefig) {
             })
             .style('border-style', "none")
             .html('<span style="font-size:40px;">New virus (2019-nCoV)</span><span style="font-size:20px;">(confrimed cases/deaths):</span><br /><span style="color:red;" ><strong  id="nvlabel1">'+conf+'</strong ></span><span style="color:black;"><strong  id="nvlabel2">/'+dece+'</strong></span>')
-    }, 3000)
+    }, 6000)
 }
