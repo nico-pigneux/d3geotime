@@ -2,6 +2,7 @@
 
 //title
 var thebody = d3.select('body')
+
 var morebox = thebody.append('div')
 .styles({"positon":"relative"})
 
@@ -26,7 +27,8 @@ var titlebox = morebox.append('div')
         "vertical-align":"top",
         "opacity":"0.8"
     })
-    .text("New Coronavirus Outbreak")
+    // .text("New Coronavirus Outbreak")
+    .html("<span style='font-family:黑体;'>李文亮</span> 1986.10.12 - 2020.02.07")
     .attrs({ "id": "currenttimestamp" })
     .styles({
         "font-family":"Bebas Neue",

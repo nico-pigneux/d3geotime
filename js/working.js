@@ -22,3 +22,6 @@ var getlinks = d3.html(dxyurl, d => {
     console.log(dataobj1.text())
 
 }) // end d3.html
+
+
+
