@@ -24,4 +24,6 @@ var getlinks = d3.html(dxyurl, d => {
 }) // end d3.html
 
 
+thebody
+    .style("background-image", "url(img/lwl4.jpg)")
 
