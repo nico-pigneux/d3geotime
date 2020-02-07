@@ -18,9 +18,7 @@ var titlebox = morebox.append('div')
     "margin-left": "50px",
     "width":"1500px",
     "height":"40px",
-    "vertical-align":"top",
-    "positoin":"absolute"
-    //, "z-index": "1"
+    "vertical-align":"top"
 })
     .styles({
         "text-align": "center",
@@ -29,12 +27,22 @@ var titlebox = morebox.append('div')
     })
     // .text("New Coronavirus Outbreak")
     .html("<span style='font-family:黑体;'>李文亮</span> 1986.10.12 - 2020.02.07")
-    .attrs({ "id": "currenttimestamp" })
+    .attrs({ "id": "pagetitle" })
     .styles({
         "font-family":"Bebas Neue",
         "font-size":"100px", 
         'font-weight': 'bold'
     })
+    .on('click', function(d) {
+        console.log('open tab')
+        window.open(
+          'https://en.wikipedia.org/wiki/Li_Wenliang',
+          '_blank' // <- This is what makes it open in a new window.
+        );
+      });
+    // .attr("xlink:href", d=>{
+    //     return "https://en.wikipedia.org/wiki/Li_Wenliang"
+    // })
 
 // // subtitle: github link
 // titlebox.append('h3')

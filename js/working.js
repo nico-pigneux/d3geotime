@@ -27,3 +27,7 @@ var getlinks = d3.html(dxyurl, d => {
 thebody
     .style("background-image", "url(img/lwl4.jpg)")
 
+titlebox 
+    .style("position", "fixed")
+    .style(  "cursor","pointer")
+    .style(   "z-index", "99")
