@@ -25,8 +25,7 @@ var titlebox = morebox.append('div')
         "vertical-align":"top",
         "opacity":"0.8"
     })
-    // .text("New Coronavirus Outbreak")
-    .html("<span style='font-family:黑体;'>李文亮</span> 1986.10.12 - 2020.02.07")
+    .text("New Coronavirus Outbreak")
     .attrs({ "id": "pagetitle" })
     .styles({
         "font-family":"Bebas Neue",
@@ -36,13 +35,11 @@ var titlebox = morebox.append('div')
     .on('click', function(d) {
         console.log('open tab')
         window.open(
-          'https://en.wikipedia.org/wiki/Li_Wenliang',
+          'https://www.who.int/westernpacific/emergencies/novel-coronavirus',
           '_blank' // <- This is what makes it open in a new window.
         );
       });
-    // .attr("xlink:href", d=>{
-    //     return "https://en.wikipedia.org/wiki/Li_Wenliang"
-    // })
+
 
 // // subtitle: github link
 // titlebox.append('h3')
