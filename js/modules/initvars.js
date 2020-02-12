@@ -16,8 +16,8 @@ var startDate = new Date("2020-01-21"),
 
 // play related
 var
-    hoursPerInterval = 6; // number of hours to skip per step
-speedInMSPerStep = 1; // in ms, 1 second = 1000 ms
+    hoursPerInterval = 24; // number of hours to skip per step
+speedInMSPerStep = 0.2; // in ms, 1 second = 1000 ms
 
 // size of the slider box
 var margin = { top: 0, right: 10, bottom: 0, left: 10 },
