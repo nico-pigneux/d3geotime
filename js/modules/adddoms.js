@@ -95,7 +95,7 @@ var foot_lchart1box = chartbox2.append('div')
     // "border-width":"1px",
 })
 .append('h3')
-.html("Number of confirmed cases over time (Red: 2019-nCoV; Grey: 2003-SARS).  <span> as of " + Date() + "</span>")
+.html("Number of confirmed cases over time (Red: COVID-19; Grey: 2003-SARS).  <span> as of " + Date() + "</span>")
 .styles({
     "color":"grey",
     "font-weight":"normal"
@@ -279,7 +279,7 @@ var thetotalnumbox = thebigbox.append('div')
     });
 
 //title of the video
-thetotalnumbox.append('span').html('number of confirmed 2019-nCoV cases<br />')
+thetotalnumbox.append('span').html('number of confirmed COVID-19 cases<br />')
     .styles({
         // "font-family":"Source Sans Pro",
         "font-weight":"400",
