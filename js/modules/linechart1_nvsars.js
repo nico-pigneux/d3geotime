@@ -49,6 +49,7 @@ function makelinechart1() {
 
             tmp.time = moment(dstr, "YYYY-MMMM-D")
             tmp.timestr = formatDateYMD(tmp.time)
+            // tmp.timestr = formatDateMD(tmp.time)
             // console.log(tmp)
             sarsreportdates.push(tmp)
         })
@@ -90,6 +91,7 @@ function makelinechart1() {
                     // order matters latter merging with nv data
                     tmp.time = sarsreportdates[id - 1].time
                     tmp.timestr = formatDateYMD(tmp.time)
+                    // tmp.timestr = formatDateMD(tmp.time)
                     tmp.count = count
                     tmp.group = 'sars'
                     // tmp.id = id
