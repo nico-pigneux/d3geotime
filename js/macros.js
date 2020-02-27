@@ -511,6 +511,6 @@ function  AddNVlabel (thefig) {
                 "opacity": "1"
             })
             .style('border-style', "none")
-            .html('<span style="font-size:40px;">New virus (COVID-19)</span><span style="font-size:20px;">(confrimed cases/deaths):</span><br /><span style="color:red;" ><strong  id="nvlabel1">'+conf+'</strong ></span><span style="color:black;"><strong  id="nvlabel2">/'+dece+'</strong></span>')
+            .html('<span style="font-size:40px;">New virus (COVID-19)</span><span style="font-size:20px;">(confrimed cases/deaths):</span><br /><span style="color:#8B0000;" ><strong  id="nvlabel1">'+conf+'</strong ></span><span style="color:black;"><strong  id="nvlabel2">/'+dece+'</strong></span>')
     }, 6000)
 }
