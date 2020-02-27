@@ -82,10 +82,11 @@ d3.text("data/nvdata.csv", function (text) {
 
 
 // Put the title at the top. To make it work, has to run it at last
-// titlebox 
-//     .style("position", "relative") //fixed, the position of the div is fixed even when scrolling up and down...//'relative'
-//     .style(  "cursor","pointer")
-//     .style(   "z-index", "99")
+titlebox 
+    .style("position", "relative") //fixed, the position of the div is fixed even when scrolling up and down...//'relative'
+    .style(  "cursor","pointer")
+    .style(   "z-index", "99")
+    .style("color", "rgba(0,0,0,0.5)")
 
 
 
