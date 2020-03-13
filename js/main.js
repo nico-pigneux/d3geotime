@@ -1,4 +1,4 @@
-// read data from a json file
+// read data from a csv file
 d3.text("data/nvdata.csv", function (text) {
 
     // the csv file doesnot have header, so import as text, and use csvParseRows to convert to an obj
