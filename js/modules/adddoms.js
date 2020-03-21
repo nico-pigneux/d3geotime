@@ -326,15 +326,24 @@ thetotalnumbox.append('span').attrs({"id":"totaldeath"})
 // links to download of data
 thetotalnumbox
     .append("xhtml:a")
-    .attr("href", "./data/nvdata.csv")
-    .html("<br /><br /><br />download nvdata.csv<br /><br />")
-    .append('xhtml:a')
-    .attrs({
-        "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
-        "target": '_blank'
+    .attr("href", "https://resources-covid19canada.hub.arcgis.com/")
+    .html('<br /><br /><br /><span style="font-size:30px">Data is no longer updated after 2020-03-19.<br /> For Canada data: go to the Esri CoVID-19 Canada site</span><br /><br />')
+    .styles({
+    //     "font-family":"Bebas Neue",
+        // "font-size":"60px", 
+    //     'font-weight': 'bold',
+        'color':"black"
     })
-    .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
+    // .attr("href", "./data/nvdata.csv")
+    // .html("<br /><br /><br />download nvdata.csv<br /><br />")
+    // .append('xhtml:a')
+    // .attrs({
+    //     "href": "https://github.com/ShenzhenYAO/d3geotime/tree/v6",
+    //     "target": '_blank'
+    // })
+    // .text("Github: https://github.com/ShenzhenYAO/d3geotime/tree/")
     ;
+    // .html("data are no longer updated since Mar 19")
 
 // insert a box for charts
 var chartbox = thebody.append('div')
