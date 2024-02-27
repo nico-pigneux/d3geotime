@@ -52,7 +52,7 @@ var theticks = slider.insert("g", ".track-overlay")
   .attr("text-anchor", "middle")
   // .text(function (d) { return formatDateIntoYear(d); });
   .text(function (d) { return formatDateMD(d); });
-  // .text(function (d) { return formatDateYMD(d); });
+// .text(function (d) { return formatDateYMD(d); });
 
 // add a handle for sliding 
 var handle = slider.insert("circle", ".track-overlay")

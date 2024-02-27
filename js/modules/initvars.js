@@ -25,8 +25,8 @@ var margin = { top: 0, right: 10, bottom: 0, left: 10 },
     height = 100 - margin.top - margin.bottom;
 
 // the global var for plot data
-var dataset; // the loaded data (a JSON)
-var newData; // filtered data, i.e., data before the time according to the slider
+// var dataset; // the loaded data (a JSON)
+// var newData; // filtered data, i.e., data before the time according to the slider
 
 // the global vars for nodes to be plotted on the map
 var nodes; // the d3 data and dom binded objects
